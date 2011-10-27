@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>ServerCyde - Dashboard</title>[%inc:/a/html/dash/head.htm%]
+    <script type="text/javascript">
+        $(function () {
+
+            $("textarea").uniform();
+
+            $.validator.methods.example = function (value, element, param) {
+                return value != $(element).attr('title');
+            };
+
+            $("#Site_Form").validate({
+                errorElement: "span",
+                errorContainer: $("#errors"),
+                errorPlacement: function (error, element) {
+                    element.closest("li").addClass("error");
+                    element.after(error);
+                },
+                success: function (label) {
+                    label.removeClass("error").closest("li").removeClass("error");
+                },
+                rules: {
+                    site_name: { required: true },
+                    site_url: { required: true },
+                    amazonkey: { required: true },
+                    amazonpassword: { required: true }
+                }
+            });
+        }); 
+    </script>
+</head>
+<body nav="navsitesettings">
+    [%inc:/a/html/dash/nav.htm%]
+    <div id="Main">
+
+     <div class="middle box ui-corner-all [%hidenew%]">
+        <div class="content">
+            <h3>Stats</h3>
+            <b>Requests: [%requests%]</b>
+            <h3>Code to put in your page</h3>
+            <textarea style="height:50px;">&lt;script type=&quot;text/javascript&quot; src=&quot;http://api.servercyde.com/script/jquery-1.6.2.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;http://api.servercyde.com/api/[%siteid%]/&quot;&gt;&lt;/script&gt;
+            </textarea>
+        </div>
+    </div>
+
+                <br />
+
+
+        <div class="middle box  ui-corner-all">
+            <div class="content">
+                
+                
+                <p><b>Info on usage of SimpleDB</b> The GUI on the next few pages does make a few calls to your DB in order to populate dropdowns, for a domains list for example, but other than that it only hits the DB when you explicity initiate or test a query.</p>
+                <p>If you want to just poke around you can browse with the tabs to play with the default SimpleDB instance (it's a demo database so don't try to build anything serious on it).</p>
+                
+                <h3>
+                    [%editnew%] Site</h3>
+                <div id="form">
+                    [%notification%]
+                    <form class="Form" id="Site_Form" action="" method="post">
+                        <ul>
+                            <li>
+                                <label for="firstName">
+                                    Site Nick Name:</label>
+                                <input maxlength="50" id="site_name" name="site_name" value="[%site_name%]" type="text" />
+                                 </li>
+                            <li>
+                                <label for="Site_URL">
+                                    Site Hostname <small> (eg <b>servercyde.com</b> dont include http://)</small>:</label>
+                                <input id="Site_URL" name="site_url" value="[%site_url%]" type="text" />
+                                 </li>
+                            <li>
+                                <label for="smtpserver">
+                                    SMTP Server: <br /><small>We recommend postmarkapp.com, <a href="http://postmarkapp.com/" target="_blank">signup</a> (they have a 1000 free for new customers)</small></label>
+                                <input id="smtpserver" name="smtpserver" value="[%smtpserver%]" type="text" />
+                                 </li>
+                            <li>
+                                <label for="smtpusername">
+                                    SMTP Username:</label>
+                                <input id="smtpusername" name="smtpusername" value="[%smtpusername%]" type="text" />
+                                 </li>
+                            <li>
+                            <li>
+                                <label for="smtppassword">
+                                    SMTP Password:</label>
+                                <input id="smtppassword" name="smtppassword" value="[%smtppassword%]" type="text" />
+                                 </li>
+                            <li>
+                             <li>
+                                <label for="supportemail">
+                                    From Email Address:</label>
+                                <input id="supportemail" name="supportemail" value="[%supportemail%]" type="text" />
+                                 </li>
+                            <li>
+                             <li>
+                                <label for="supportemailname">
+                                    From Email Name:</label>
+                                <input id="supportemailname" name="supportemailname" value="[%supportemailname%]" type="text" />
+                                 </li>
+                            <li>
+                                <label for="amazonkey">
+                                    Amazon Key:</label>
+                                <input id="amazonkey" name="amazonkey" value="[%amazonkey%]" type="text" />
+                                 </li>
+                            <li>
+                                <label for="amazonpassword">
+                                    Amazon Password:</label>
+                                <input id="amazonpassword" name="amazonpassword" value="[%amazonpassword%]" type="text" />
+                                 </li>
+                           
+                            <li>
+			                    <label for="FBKey">Facebook Key:</label>
+			                    <input id="FBKey" name="FBKey" value="[%FBKey%]" type="text" />
+				
+			                    <label for="FBPassword">Facebook Password:</label>
+			                    <input id="FBPassword" name="FBPassword" value="[%FBPassword%]" type="text" />
+		                    </li>
+              <!--
+        <li>
+			<label for="googlekey">Google Key:</label>
+			<input id="googlekey" name="googlekey" value="[%googlekey%]" type="text" />
+				
+			<label for="googlepassword">Google Password:</label>
+			<input id="googlepassword" name="googlepassword" value="[%googlepassword%]" type="text" />
+		</li>-->
+                             
+				            <li  ><label><span id="errors" class="hidden">Please correct errors</span></label><a href="#" onclick="SC.SubmitForm(this); return false;" class="submit">Save</a></li>
+			            
+                        </ul>
+                    </form>
+                </div>
+                <br />
+                <a href="/dash/"  class="submit">Cancel</a>
+           
+       
+                <br /> 
+
+        <br />
+                 
+ </div> 
+ </div>
+    </div>
+    [%footer%]
+</body>
+</html>

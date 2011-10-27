@@ -1,0 +1,43 @@
+﻿                    <fieldset>
+                    <ul class="Condition">
+                            <b class="count">Condition [%counter%].</b> <br /><a href="#" onclick="$(this).closest('fieldset').remove(); BuildCurrentQuery();">- Remove Condition</a>
+                            <li class="or_and_intersect [%remove%]">
+                                <label for="[%count%]or_and_intersect">Or, And, Intersect</label> 
+                                <select name="[%count%]or_and_intersect" id="[%count%]or_and_intersect">
+                                    [%or_and_intersect%]
+                                </select>
+                            </li>
+
+                            <li>
+                                <label for="[%count%]where_field">Attribute</label> 
+                                 <select name="[%count%]where_field" id="[%count%]where_field">
+                                    <option>Select Attribute</option>
+                                    [%where_field%]
+                                </select>
+                            </li>
+
+                            <li>
+                                <label for="[%count%]operator">Operator</label> 
+                                 <select name="[%count%]operator" id="[%count%]operator">
+                                    [%operator%]
+                                </select>
+                            </li>
+
+                            <li><div id="[%count%]li_const_value_1">
+                                <label for="[%count%]const_value_1">Operand 1:<br /><small>(optional, leave blank for required field) Tokens: [&#37;currentuserid&#37;], [&#37;ipaddress&#37;] </small> </label>
+                                <input id="[%count%]const_value_1" name="[%count%]const_value_1" value="[%const_value_1%]"  type="text" />
+                                </div>
+                            </li>
+
+                            <li><div id="[%count%]li_const_value_2">
+                                <label for="[%count%]const_value_2">Operand 2:<br /><small> (optional, leave blank for required field)</small> </label>
+                                <input id="[%count%]const_value_2" name="[%count%]const_value_2" value="[%const_value_2%]"  type="text" /></div>
+                            </li> 
+
+                            <li>
+                                <label for="[%count%]every">Every:<br /><small> (apply contition to all values for multi-value attributes <a href="#" class="tip" title="Every - For performance reasons, only use this if you do have multi valued attributes">(more)</a>)</small></label>
+                                <input id="[%count%]every" name="[%count%]every" value="yes" type="checkbox" token="every"  />
+                            </li> 
+
+                        </ul>
+                        </fieldset>

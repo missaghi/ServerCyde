@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>ServerCyde - Dashboard</title>[%inc:/a/html/dash/head.htm%]
+    <script type="text/javascript">
+        $(function () {
+            $.validator.methods.example = function (value, element, param) {
+                return value != $(element).attr('title');
+            };
+
+            $("#Site_Form").validate({
+                errorElement: "span",
+                errorContainer: $("#errors"),
+                errorPlacement: function (error, element) {
+                    element.closest("li").addClass("error");
+                    element.after(error);
+                },
+                success: function (label) {
+                    label.removeClass("error").closest("li").removeClass("error");
+                },
+                rules: {
+                    site_name: { required: true },
+                    site_url: { required: true },
+                    amazonkey: { required: true },
+                    amazonpassword: { required: true }
+                }
+            });
+        }); 
+    </script>
+</head>
+<body nav="navsitesettings">
+    [%inc:/a/html/dash/nav.htm%]
+    <div id="Main">
+        <div class="middle box  ui-corner-all">
+            <div class="content">
+                <h3>
+                    [%editnew%] Site</h3>
+                <div id="form">
+                    [%notification%]
+                    <form class="Form" id="Site_Form" action="" method="post">
+                        <ul>
+                            <li>
+                                <label for="firstName">
+                                    Site Nick Name:</label>
+                                <input maxlength="50" id="site_name" name="site_name" value="[%site_name%]" type="text" />
+                                <em>*</em> </li>
+                            <li>
+                                <label for="Site_URL">
+                                    SiteURL (include http://):</label>
+                                <input id="Site_URL" name="site_url" value="[%site_url%]" type="text" />
+                                <em>*</em> </li>
+                            <li>
+                                <label for="amazonkey">
+                                    Amazon Key:</label>
+                                <input id="amazonkey" name="amazonkey" value="[%amazonkey%]" type="text" />
+                                <em>*</em> </li>
+                            <li>
+                                <label for="amazonpassword">
+                                    Amazon Password:</label>
+                                <input id="amazonpassword" name="amazonpassword" value="[%amazonpassword%]" type="text" />
+                                <em>*</em> </li>
+                            <!--
+        <li>
+			<label for="facebookkey">Facebook Key:</label>
+			<input id="facebookkey" name="facebookkey" value="[%facebookkey%]" type="text" />
+				
+			<label for="facebookpassword">Facebook Password:</label>
+			<input id="facebookpassword" name="facebookpassword" value="[%facebookpassword%]" type="text" />
+		</li>
+
+        <li>
+			<label for="googlekey">Google Key:</label>
+			<input id="googlekey" name="googlekey" value="[%googlekey%]" type="text" />
+				
+			<label for="googlepassword">Google Password:</label>
+			<input id="googlepassword" name="googlepassword" value="[%googlepassword%]" type="text" />
+		</li>-->
+                             
+				            <li  ><label><span id="errors" class="hidden">Please correct errors</span></label><a href="#" onclick="SC.SubmitForm(this); return false;" class="submit">Save</a></li>
+			            
+                        </ul>
+                    </form>
+                </div>
+                <br />
+                <a href="/dash/"  class="submit">Cancel</a>
+            </div> 
+        </div>
+                <br /> 
+
+        <div class="middle box ui-corner-all [%hidenew%]">
+            <div class="content">
+                <h3>Stats</h3>
+                <b>Requests: [%requests%]</b>
+            </div>
+        </div>
+
+
+    </div>
+    [%footer%]
+</body>
+</html>

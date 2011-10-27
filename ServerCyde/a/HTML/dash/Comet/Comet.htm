@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>ServerCyde - Dashboard</title>[%inc:/a/html/dash/head.htm%] 
+    <script type="text/javascript">
+    
+    </script>
+ </head>
+<body nav="navcomet" style="position:relative;">
+    [%inc:/a/html/dash/nav.htm%]
+    <div id="Main">
+
+        <div class="middle box  ui-corner-all">
+            <div class="content">
+                    [%notification%]
+                <h3>
+                    Comet</h3>
+                    <hr /> 
+                <h3>
+                    COMET Calls Via the JS Library</h3>
+                    <p>ServerCyde.Comet.Subscribe({ChannelID : id}, success, failed)</p>
+                    <p>ServerCyde.Comet.Publish({ChannelID : id, message : "message here"}, success, failed)</p> 
+                    <hr />
+                <h3>
+                    COMET Calls Directly To The server (click to get test form)</h3>
+                    <a target="_blank" href="http://api.servercyde.com/api/3/Comet/APICometSubscribe/?ChannelID=2"><b>Click to Subscribe</b></a> (opens a new window, which will appear to hang)
+                    <form target="_blank" action="http://api.servercyde.com/api/3/Comet/APICometPost/" method=post>
+                        <input type="hidden" name="ChannelID" value="2" />
+                        <input type="text" name="message" value="type a message here"  />
+                        <input type="submit"   value="Publish"  />(will send the message to all subscribed users, it will appear in the first window)
+                    </form>
+            </div> 
+        </div> 
+
+    </div>
+    [%footer%]
+    <div class="hidden">
+        <div class="" id="ConfirmDomainChange">
+             <div id="basic-template"> 
+                <p>Changing the domain will result in losing all of the current setting.</p>
+                <button class="confirm  ui-dialog-close">Change Domain</button> <button class="cancel ui-dialog-close">Cancel</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

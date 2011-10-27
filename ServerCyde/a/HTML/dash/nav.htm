@@ -1,0 +1,58 @@
+﻿ 
+
+
+<div id="Header">
+            <div class="middle" style="position:relative;" >
+                
+                <div style="position:absolute; z-index:0; color:#ccc; left:500px; top:10px; font-size:20px;">BETA</div>
+
+
+                <div style="float:right; color:#224466; margin-bottom:0px; margin-left:0px; margin-right:0; margin-top:10px; font-size:18px; text-align:right; width:315px;">
+                    <div class="[%memberbox%]" > 
+                        <label for="site_selector">
+                     
+                        Manage Site: 
+                </label>
+                <select name="site_selector" id="site_selector">
+                    [%dash_site_options%]
+                </select>
+                <button type="submit" onclick="window.location.href = '/dash/' + $('#site_selector').val() + '/site/';">
+                    <span class="smallbutton"><span>Go</span></span></button>
+                        <div style="margin-right:10px; margin-top:3px;">
+                        <span style="font-size:10px;"><a href="/dash/account/" title="Account Settings" style="font-size:10px; color:#789E1B;">[%dash_currentusername%]</a>  &nbsp;    <a href="/logout/">Log out</a> </span> 
+                        <div style="font-size:10px; color:#aaa; ">Page Served At: [%currenttime%]</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="/dash/"><img  style="margin-top:10px;" src="/a/img/logo.png" /></a> 
+            </div>
+        </div>
+        <style type="text/css">
+            {padding-bottom:10px;}
+        </style>
+
+        <div id="Menu"  style="clear:both;"> 
+               <ul class="middle">
+                    <li class="ui-state-default ui-corner-top"><a href="/dash/">Home</a></li> 
+                    <li class=" ui-state-default ui-corner-top navsitesettings "><a href="/dash/[%siteid%]/site/">Site Settings</a></li>
+                    <li class="ui-state-default ui-corner-top navsimpledbdomains "><a href="/dash/[%siteid%]/SimpleDB/Domains/">Domains</a></li>
+                    <li class="ui-state-default ui-corner-top navsimpledbselects "><a href="/dash/[%siteid%]/SimpleDB/selects/">Select Query</a></li>
+                    <li class="ui-state-default ui-corner-top navsimpledbmodify "><a href="/dash/[%siteid%]/SimpleDB/modify/">Modify Attributes</a></li>
+                    <li class="ui-state-default ui-corner-top navsimpledbget "><a href="/dash/[%siteid%]/SimpleDB/get/">Get Attributes</a></li>
+                    <li class="ui-state-default ui-corner-top navemail "><a href="/dash/[%siteid%]/emails/">Email</a></li> 
+                    <li class="ui-state-default ui-corner-top navusers "><a href="/dash/[%siteid%]/users/">Users</a></li>
+                    <li class="ui-state-default ui-corner-top navcomet"><a href="/dash/[%siteid%]/comet/">comet</a></li>
+                    <li class="ui-state-default ui-corner-top navAPIs"><a href="/dash/[%siteid%]/APIs/">APIs</a></li>
+                </ul>
+        </div>
+
+        <script>
+            $(function () {
+
+                $("." + $("body").attr('nav')).addClass("ui-tabs-selected ui-state-active").css({ "padding-bottom": "10px" });
+                $("#Menu li").not(".ui-tabs-selected").mouseover(function () { $(this).addClass("ui-state-active"); }).mouseout(function () { $(this).removeClass("ui-state-active"); });
+                $("#Menu li.ui-tabs-selected").mouseover(function () { $(this).removeClass("ui-state-active"); }).mouseout(function () { $(this).addClass("ui-state-active"); });
+
+                $("#Menu li.hidden").remove();
+            });
+        </script>

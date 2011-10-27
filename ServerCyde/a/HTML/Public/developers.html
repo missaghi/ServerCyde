@@ -1,0 +1,323 @@
+﻿<!DOCTYPE html>
+<html dir="ltr" lang="en-US" itemscope itemtype="http://schema.org/Product">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>ServerCyde - Developers</title>
+[%inc:/a/html/public/head.html%]
+<script type="text/javascript" src="http://api.servercyde.com/api/3/"></script>
+<style type="text/css">
+ 
+    
+
+</style>
+<script type="text/javascript">
+    var passed = false;
+    var colors = ["aqua", "black", "blue", "fuchsia", "gray", "grey", "green", "lime", "maroon", "navy", "olive", "purple", "red"];
+    var mycolor = Math.round(Math.random() * colors.length);
+
+    function ShowBadge() {
+        $.sticky($("#badge").text(), { "autoclose": false }, function () {
+            $(".tip").tooltip({
+                showURL: false, delay: 0, track: true, showBody: " - "
+            });
+        });
+    }
+
+    //pads left
+    String.prototype.lpad = function (padString, length) {
+        var str = this;
+        while (str.length < length)
+            str = padString + str;
+        return str;
+    }
+
+
+    $().ready(function () {
+
+        $("#CometMessage").keypress(function (e) {
+            if (e.keyCode == 13) {
+                $("#cometMessageButton").click();
+                return false;
+            }
+        });
+
+        $("#email").keypress(function (e) {
+            if (e.keyCode != 13) {
+                $("#email").val("Ditch the Dvorak KB, try again!");
+                return false;
+            }
+            else {
+                passed = true;
+                $("#email").unbind("keypress").val("");
+                $("#email").unbind("click").click(function () { if (this.value == 'TRY to Enter your e-mail address') { this.value = '' }; });
+                $("#message").text("You passed, enter email now");
+                setTimeout(' $("#message").fadeOut(function() {$(this).html("&nbsp;")});', 2000);
+                $("#email").keypress(function (e) { if (e.keyCode == 13) return false; });
+                return false;
+            }
+        });
+
+        $("#email").click(function () {
+            $("#email").val("press KeyCode 13 to continue...");
+        });
+
+        //setTimeout(ShowBadge, 2000); 
+
+        //ServerCyde.Comet.Publish(2, mycolor + ",New person online!", null, function (data) { });
+
+
+        // Show message
+        function ShowMessages(data) {
+
+            //$("#comets").append($("<li />").text("[" + now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds() + "] " + datatext).css("color", color));
+            $("#cometdemo").slideDown();
+            $("#cometdemobutton img").fadeOut();
+            var messages = $("ul#comets");
+            $.each(data.Result.reverse(), function (i, item) {
+                var li = $("<li><b><span class='time'></span> [<span class='name'></span>]</b> <span class='message'></span></li>").attr("rel", item.Name);
+                $.each(item.Attributes, function (a, attribute) {
+                    switch (attribute.Name.toLowerCase()) {
+                        case ("name"): $(".name", li).text(attribute.Value); break;
+                        case ("color"): $(li).css("color", colors[attribute.Value]); break;
+                        case ("message"): $(".message", li).text(attribute.Value); break;
+                        case ("date"):
+                            {
+                                var time = new Date(parseInt(attribute.Value));
+                                $(".time", li).text(time.getHours().toString().lpad("0", 2) + ":" + time.getMinutes().toString().lpad("0", 2) + ":" + time.getSeconds().toString().lpad("0", 2));
+                                break;
+                            }
+                        default: break;
+                    }
+                });
+
+                // add new messages
+                if (messages.find("li[rel=" + item.Name + "]").length == 0)
+                    messages.append(li.show());
+            });
+
+            //                    try {messages[0].scrollTo(0, messages[0].scrollHeight);}
+            //                    catch {console.log("scroll error");}
+
+
+            //                    //getCount();
+            //                    console.log($("#comets li").length - 10)
+            //                    if ($("#comets li").length > 10) {
+            //                        $("#comets li:lt(" + ($("#comets li").length - 10) + ")").remove();
+            //                    }
+
+
+        }
+
+        function GetMessages(data) {
+
+            if (data != undefined) {
+                //add message
+                var message = data.split(",");
+
+                var li = $("<li><b><span class='time'></span> [<span class='name'></span>]</b> <span class='message'></span></li>").attr("rel", message[3]);
+                $(".name", li).text(message[1]);
+                $(li).css("color", colors[message[0]]);
+                $(".message", li).text(message[2].replace("&#44;", ","));
+                var time = new Date();
+                $(".time", li).text(time.getHours().toString().lpad("0", 2) + ":" + time.getMinutes().toString().lpad("0", 2) + ":" + time.getSeconds().toString().lpad("0", 2));
+
+                var messages = $("ul#comets");
+                if (messages.find("li[rel=" + message[3] + "]").length == 0)
+                    messages.append(li.show());
+            }
+
+            //getmsgs from server
+            ServerCyde.SimpleDB.Select.GetMessages({}, ShowMessages);
+        }
+
+        // Subscribe to channel 1 and alert the messages
+        function Subscribe() {
+            ServerCyde.Comet.Subscribe(2, GetMessages, function (data) { });
+        };
+
+
+        function getCount() {
+            ServerCyde.Comet.UserCount(2, function (data) {
+                $("#usercount").text(data.count);
+
+            }, function (data) { });
+        }
+        //getCount();
+
+        setTimeout(Subscribe, 100);
+        GetMessages();
+
+        $(".features3 li").append('<img src="/a/img/footer.png"  style="position:absolute;bottom:-5px; width:300px; height:5px; left:-10px;"  />');
+        $(".callout").append('<img src="/a/img/footer.png"  style="position:absolute;bottom:-10px; width:100.9%; height:10px; left:-7px;"  />');
+        $("#stepswrapper").append('<img src="/a/img/footer.png"  style="position:absolute;bottom:-10px; width:100%; height:10px;  "  />');
+
+        $("#myname").one("focus", function () { $(this).css({ color: "#000", "font-style": "normal" }).val('') });
+    });
+
+    function PostMessage() {
+        var message = $('#CometMessage').val();
+        $('#cometMessageButton').attr('disabled', 'disabled');
+
+        var msg = new Array();
+        msg.push(mycolor);
+        msg.push($("#myname").val());
+        msg.push($('#CometMessage').val().replace(",", "&#44;"));
+
+        ServerCyde.SimpleDB.Modify.PostMessage({ "Item.1.message": $('#CometMessage').val(), "Item.1.name": $("#myname").val(), "Item.1.color": mycolor }, function (data1) {
+
+            msg.push(data1.ItemName);
+
+            ServerCyde.Comet.Publish(2, msg.join(","), function (data) { $('#CometMessage').val(''); $('#cometMessageButton').removeAttr('disabled', 'disabled'); }, function (data) { $('#cometMessageButton').removeAttr('disabled', 'disabled'); });
+        }, function () { $('#cometMessageButton').removeAttr('disabled', 'disabled'); });
+    } 
+   
+</script>
+</head>
+<body class="docs">
+<div class="header">
+	<div>
+		<div class="center">
+			[%inc:/a/html/public/header.html%]
+			<div class="page-title">
+				<div>
+					<ul>
+                        <li><h2 class="page-title-name">Developers:</h2></li>
+                        <li><h2><a href="/docs/">Quick Start</a></h2></li>
+                        <li><h2><a href="http://www.youtube.com/watch?v=_9DlKc8aVx8&feature=player_embedded" target="_blank">Tutorial Video</a></h2></li>
+                        <li><h2><a href="http://scan2chat.com" target="_blank">Sample Site</a></h2></li> 
+                        <li><h2><a href="/demos/" target="_blank">Demos</a></h2></li> 
+                    </ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--div.header end -->
+<!--div.container start -->
+<div class="container">
+	<div class="center">	
+        
+         <h3 class="callout"><a href="/docs/">Quick Start</a><br /> <small>A walkthough of how to create a new account, build some "stored procedures" for your app and then consume the generated API</small></h3>
+         <h3 class="callout"><a href="http://www.youtube.com/watch?v=_9DlKc8aVx8&feature=player_embedded" target="_blank">Tutorial Video</a><br /> <small>How to build a real-time chat in about 10 min using only client side code</small></h3>
+         <h3 class="callout"><a href="http://scan2chat.com" target="_blank">Sample Site</a><br /> <small>A real time chat app that persists data to an Amazon SimpleDB. The same one that is in the tutorial video.</small></h3>
+         <h3 class="callout"><a href="/demos/">Demos</a><br /> <small>Code examples of ServerCyde features, with interactive demos. It will popup an alert whenever anyone else opens the while you are on it, including when you open it, thats part of the commet "subsciption" demo.</small></h3>
+		 
+
+         <p>We are working on building out more documentation, it's a balance between coding new features and working more docs.</p>
+
+
+         <h2 style="  border:none; text-align:left; font-size:20px; color:#0067AB; cursor:pointer;  margin-top:20px;" onclick="$('#dbdemo, #cometdemo').slideToggle(); $('#dbdemobutton img, #cometdemobutton img').toggle();">
+                Sample Code + Demo</h2>
+
+                    <h3 class="callout" id="cometdemobutton" onclick="$('#cometdemo').slideToggle(); $(this).find('img').toggle();"
+                        style="cursor: pointer;">
+                        <img style="cursor: pointer; float: right; margin: 10px;" src="/a/img/toggle.png" />
+                        COMET<br />
+                        <small>Real time events with 2 lines of Javascript</small></h3>
+                    <div id="cometdemo" style="display: none; padding: 20px; border-bottom: 7px solid #ccc;
+                        background: #fefefe; border-left: 7px solid #ccc; margin-top: -15px;">
+
+                        <div style="width:210px;padding-right:10px; float:right"><b>Name:</b> <input id="myname" type="text" value="n00b"  style=" vertical-align:top; float:right; width:160px; border:1px solid #ccc; padding:3px; color:#555; font-style:italic; "     /></div>
+                        <a href="#" style="cursor: pointer;"><b>Live Demo:</b> Send a COMET Message to everyone viewing this page. <!--<b><span id="usercount" style="color:#444;">0</span> users online right now</b>--></a><br /><br />
+                        <div class="comets">
+                        <ul id="comets" >
+                        </ul>
+
+                        <textarea  style="  margin:0; margin-top:5px; float:left; padding:5px; border: 1px solid #ccc; vertical-align: top; height:40px; width: 723px;"
+                            id="CometMessage" name="message"></textarea>
+                        <input id="cometMessageButton" style="margin:0; float:left; margin-top:5px;  padding: 5px; height:52px; vertical-align: top;  width: 111px; border: 1px solid #ccc; border-left:none;" type="button"
+                            value="Send (or enter)" onclick="PostMessage();  return false;" />
+                            <div class="clear">
+                        </div>
+                        </div>
+                        <br />
+                        (If you happen to be the only one online <a href="http://servercyde.com" target="_blank">open this page in a new window</a> to send
+                        a message to it.)
+
+                          <br />
+                          <br />
+
+                        <div class="javascript">
+                            <span class="co1">// Sending a message to anyone subscribed to COMET channel 1</span><br />
+                            ServerCyde.<span class="me1">Comet</span>.<span class="me1">Publish</span><span class="br0">&#40;</span><span
+                                class="nu0">1</span><span class="sy0">,</span> <span class="st0">&quot;Hi!&quot;</span><span
+                                    class="sy0">,</span> <span class="kw2">null</span><span class="sy0">,</span>
+                            <span class="kw2">function</span> <span class="br0">&#40;</span>data<span class="br0">&#41;</span>
+                            <span class="br0">&#123;</span> <span class="br0">&#125;</span><span class="br0">&#41;</span><span
+                                class="sy0">;</span><br />
+                            <br />
+                            <span class="co1">// Subscribe to channel 1 and alert the messages</span><br />
+                            ServerCyde.<span class="me1">Comet</span>.<span class="me1">Subscribe</span><span
+                                class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span>
+                            <span class="kw2">function</span> <span class="br0">&#40;</span>data<span class="br0">&#41;</span>
+                            <span class="br0">&#123;</span> <span class="kw3">alert</span><span class="br0">&#40;</span>data<span
+                                class="br0">&#41;</span><span class="sy0">;</span> <span class="br0">&#125;</span><span
+                                    class="br0">&#41;</span><span class="sy0">;</span></div>
+                      
+                        
+                        <a href="/demos/" target="_blank" style="margin: 10px; float: right;">More demos</a>
+                        <div class="clear">
+                        </div>
+                    </div>
+                    <h3 class="callout" id="dbdemobutton" onclick="$('#dbdemo').slideToggle(); $(this).find('img').toggle();"
+                        style="cursor: pointer;">
+                        <img style="float: right; margin: 10px;" src="/a/img/toggle.png" />
+                        Database<br />
+                        <small>Connect to an Amazon DB without any server side code</small></h3>
+                    <div id="dbdemo" style="display: none; padding: 20px; border-bottom: 7px solid #ccc;
+                        background: #fefefe; border-left: 7px solid #ccc; margin-top: -15px;">
+                        <br />
+                        <div class="javascript">
+                            <b>Request:</b><br />
+                            <br /> 
+                            ServerCyde.<span class="me1">SimpleDB</span>.<span class="me1">Select</span>.<span
+                                class="me1">GetUsers</span><span class="br0">&#40;</span><span class="br0">&#123;</span>
+                            <span class="st0">&quot;lastname&quot;</span><span class="sy0">:</span> <span class="st0">
+                                &quot;%son&quot;</span> <span class="br0">&#125;</span><span class="sy0">,</span>
+                            GetUsersResultHandler<span class="sy0">,</span> CustomErrorHandler<span class="br0">&#41;</span><span
+                                class="sy0">;</span><br />
+                            <br />
+                            <b>Response:</b><br />
+                            <br />
+                            <span class="br0">&#123;</span> &nbsp;<span class="st0">&quot;val&quot;</span> <span
+                                class="sy0">:</span> <span class="br0">&#123;</span> <span class="st0">&quot;Errors&quot;</span>
+                            <span class="sy0">:</span> <span class="br0">&#91;</span> &nbsp;<span class="br0">&#93;</span><span
+                                class="sy0">,</span><br />
+                            &nbsp; &nbsp; &nbsp; <span class="st0">&quot;Valid&quot;</span> <span class="sy0">:</span>
+                            <span class="kw2">true</span><br />
+                            &nbsp; &nbsp; <span class="br0">&#125;</span><span class="sy0">,</span><br />
+                            &nbsp; <span class="st0">&quot;ProcName&quot;</span> <span class="sy0">:</span>
+                            <span class="st0">&quot;GetUsers&quot;</span><span class="sy0">,</span><br />
+                            &nbsp; <span class="st0">&quot;Result&quot;</span> <span class="sy0">:</span> <span
+                                class="br0">&#91;</span> <span class="br0">&#123;</span> <span class="st0">&quot;Attributes&quot;</span>
+                            <span class="sy0">:</span> <span class="br0">&#91;</span> <span class="br0">&#123;</span>
+                            <span class="st0">&quot;Name&quot;</span> <span class="sy0">:</span> <span class="st0">
+                                &quot;FirstName&quot;</span><span class="sy0">,</span><br />
+                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;Value&quot;</span>
+                            <span class="sy0">:</span> <span class="st0">&quot;Riaz&quot;</span><br />
+                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="br0">&#125;</span><span class="sy0">,</span><br />
+                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="br0">&#123;</span> <span class="st0">
+                                &quot;Name&quot;</span> <span class="sy0">:</span> <span class="st0">&quot;LastName&quot;</span><span
+                                    class="sy0">,</span><br />
+                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;Value&quot;</span>
+                            <span class="sy0">:</span> <span class="st0">&quot;Serverson&quot;</span><br />
+                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="br0">&#125;</span><br />
+                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="br0">&#93;</span><span class="sy0">,</span><br />
+                            &nbsp; &nbsp; &nbsp; &nbsp; <span class="st0">&quot;Name&quot;</span> <span class="sy0">
+                                :</span> <span class="st0">&quot;support@servercyde.com&quot;</span><br />
+                            &nbsp; &nbsp; &nbsp; <span class="br0">&#125;</span> <span class="br0">&#93;</span>
+                            <br />
+                            <span class="br0">&#125;</span></div>
+                        <a href="/demos/" target="_blank" style="margin: 10px; float: right;">More demos</a>
+                        <div class="clear">
+                        </div>
+                    </div>
+
+	</div>
+</div>
+<!--div.container end -->
+[%inc:/a/html/public/footer.html%]
+
+<script type='text/javascript' src='/a/js/jquery.form.js?ver=2.02m'></script>
+</body>
+</html>

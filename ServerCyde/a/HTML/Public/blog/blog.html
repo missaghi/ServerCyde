@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html dir="ltr" lang="en-US" itemscope itemtype="http://schema.org/Product">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>ServerCyde Blog</title>
+[%inc:/a/html/head.html%]
+
+</head>
+<body>
+<div class="header"> 
+	<div> 
+		<div class="center"> 
+			[%inc:/a/html/header.html%]
+			<div class="page-title"> 
+				<div> 
+					<h2>Blog</h2>					
+					<div class="right"> 
+						<a href="/signup/" class="button"><span>Try Us for Free!</span></a> 
+					</div> 
+				</div> 
+			</div> 
+		</div> 
+	</div> 
+</div> 
+<!--div.header end --> 
+
+<!--div.container start -->
+<div class="container">
+	<div class="center">
+		<div id="sidebar" class="sidebar right">
+			<div class="widget searchform">		
+				<form method="get" id="searchform" action="#">
+				<div>
+					<input type="text" value="" name="s" id="s" class="input-text radius" />
+					<input type="submit" id="searchsubmit" class="search-btn radius" value="Search" title="Search" />
+				</div>
+				</form>		
+			</div>
+			<div class="widget">
+				<h2>Archives</h2>
+				<ul>
+					<li><a href='blog.html' title='June 2010'>June 2010</a></li>
+				</ul>
+			</div>
+			<div class="widget">
+				<h2>Categories</h2>
+				<ul>
+					<li class="cat-item cat-item-1"><a href="blog.html" title="View all posts filed under Uncategorized">Uncategorized</a></li>
+				</ul>
+			</div>
+			<div class="widget">
+				<h2>Blogroll</h2>
+				<ul class='xoxo blogroll'>
+					<li><a href="http://wordpress.org/development/">Development Blog</a></li>
+					<li><a href="http://codex.wordpress.org/">Documentation</a></li>
+					<li><a href="http://wordpress.org/extend/plugins/">Plugins</a></li>
+					<li><a href="http://wordpress.org/extend/ideas/">Suggest Ideas</a></li>
+					<li><a href="http://wordpress.org/support/">Support Forum</a></li>
+					<li><a href="http://wordpress.org/extend/themes/">Themes</a></li>
+					<li><a href="http://planet.wordpress.org/">WordPress Planet</a></li>
+				</ul>
+			</div>
+			<div class="widget">
+				<h2>Meta</h2>
+				<ul>
+					<li>
+						<a href="http://saas-wp-ii.worryfreelabs.com/wp-login.php">Log in</a>					
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="content" class="content">
+			<div>
+				[%posts%]																
+			</div>
+		</div>
+	</div>
+</div>
+<!--div.container end -->
+[%inc:/a/html/footer.html%]
+
+<script type='text/javascript' src='/a/js/jquery.form.js?ver=2.02m'></script>
+</body>
+</html>

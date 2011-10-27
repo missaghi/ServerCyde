@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>ServerCyde - Dashboard</title>
+    [%inc:/a/html/dash/head.htm%]
+    
+</head>
+<body>
+ [%inc:/a/html/dash/nav.htm%]
+    <div id="Main">
+        <div id="Box" class="middle box ui-corner-all">
+            <div class="content">
+    [%notification%]
+
+    <h2>Welcome [%dash_currentusername%]</h2>
+    <br />
+
+
+    
+
+    <h3>Sites</h3>
+               
+            
+    <ul class="listitems">
+    <li> <label for="site_selector">
+                    Manage Site:
+                </label>
+                <select name="site_selector" id="site_selector">
+                    [%dash_site_options%]
+                </select>
+                <button type="submit" onclick="window.location.href = '/dash/' + $('#site_selector').val() + '/site/';">
+                    <span class="smallbutton"><span>Go</span></span></button></li>
+    [%sites%]</ul>
+    <!--<h3>Account</h3>
+    <p style="margin-left:5px;">Diamond Member: $30/mo</p>-->
+
+
+
+    <hr />
+    <h3>News</h3>
+    <ul>
+        <li><b>9/11/11</b> - Single sign on now works with Facebook, check out the <a href="http://servercyde.com/demos/#session">Authentication</a> section of the demo to see it implemented</li>
+        <li><b>9/1/11</b> - <a href="#" onclick="$('<div><iframe width=&quot;100%&quot; height=&quot;100%&quot; src=&quot;http://www.youtube.com/v/_9DlKc8aVx8?autoplay=1&showsearch=0&videoformat=720p&quot; frameborder=&quot;0&quot; allowfullscreen></iframe></div>').dialog({title:'Build a realtime, SimpleDB driven, chat room using only JavaScript, in about 10 min.', width: $(window).width() , height:$(window).height() }); return false;">Tutorial video is live</a></li>
+        <li><b>8/31/11</b> - You can now poke around without needing to setup a simpleDB account, we default to one of our accounts till you enter your own.</li>
+        <li><b>8/31/11</b> - Bug fixes: Thank you so much to the users who emailed us screenshots of errors, we have now implemented better error capturing that sends us an email and gives you friendly message</li>
+        <li><b>8/31/11</b> - Edited white pape is live.</li>
+        <li><b>8/31/11</b> - Beta has started.</li>
+    </ul>
+
+</div>
+</div>
+<br />
+<br />
+<div   class="middle box ui-corner-all">
+            <div class="content">
+    Let us know how it's going so far:
+    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'servercydecom'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</div>
+</div>
+</div>
+
+[%footer%]
+<script type="text/javascript">
+    $(function () {
+        $("#Menu a:gt(0)").click(function () { alert("choose or create a site first."); return false }).css({ "color": "#ccc" });
+        $("#Menu li:gt(0)").unbind("mouseover");
+    });
+    </script>
+</body>
+</html>
+

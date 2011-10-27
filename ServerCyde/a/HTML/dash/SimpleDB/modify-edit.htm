@@ -1,0 +1,256 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>ServerCyde - Dashboard</title>[%inc:/a/html/dash/head.htm%] 
+    <script type="text/javascript">
+    var domainval;
+
+    
+
+    function Update() {
+        domainval = $("#domain").val();
+        if (domainval != "") {
+            //populate fields, sorts, wipe conditions, update new condition fields (confirm first if current value != "")  
+            $("#AttributeList").html("<img src='/a/img/ajax-loader.gif' />");
+            $.post("../../../API/GetFields/", { Domain: domainval }, function (data) {
+                var arr = eval(data);
+                $("#AttributeList").html("");
+                $.each(arr, function () {
+                    $("#AttributeList").append(this + ", ");
+                });
+
+            }); 
+            $(".secondary").fadeIn();
+        }
+        else {
+            $("#attributeslist").html("");
+            $("#sort_by").html("");
+            $(".secondary").fadeOut();
+        }
+        $("#conditions").html("");
+        $("#Attributes").html("");
+    }
+
+    function ChangeDomain() {
+
+        $("#ConfirmDomainChange .confirm").click(Update)
+        $("#ConfirmDomainChange .cancel").click(function () {
+            $("#domain").unbind("change")
+            if (domainval == "")
+                $("#domain option:eq(0)").attr("selected", "selected");
+            else
+                $("#domain").find("option:contains(" + domainval + ")").attr("selected", "selected");
+            $("#domain").change(ChangeDomain);
+        });
+
+        if (domainval == "") {
+            Update();
+        }
+        else {
+            var dialog = $("#ConfirmDomainChange").show().dialog({ title: 'Confirm Domain Change' });
+            $(".ui-dialog-close").click(function () { dialog.dialog("close"); });
+        }
+    }
+
+    function FormatConditions(index) {
+        $("input[name=" + index + "_Exists]").change(function () {
+            if ($("input[name=" + index + "_Exists]:checked").val() == "false")
+            { $("#" + index + "_liexistsvalue").fadeOut(); }
+            else { $("#" + index + "_liexistsvalue").fadeIn(); }
+        }).change();
+    }
+
+    function AddCondition() {
+        var newCondition = $("#NewCondition").contents().clone();
+
+        //get count of conditions then increment rename id's and names
+        var count = $("#conditions .Condition").length;
+        if (count == 0) {
+            newCondition.find(".count").text("Condition " + (count + 1) + ".");
+            newCondition.find("label").each(function () { $(this).attr("for", count + "_" + $(this).attr("for")) });
+            newCondition.find("input, #liexistsvalue, #liexistsattribute").each(function () { $(this).attr("id", count + "_" + $(this).attr("id")) });
+            newCondition.find("input").each(function () { $(this).attr("name", count + "_" + $(this).attr("name")) });
+
+            newCondition.find(".tip").tooltip({
+                showURL: false, delay: 0, track: true, showBody: " - "
+            });
+
+            newCondition.find("input:text, input:radio").uniform();
+
+
+            //append
+            $("#conditions").append(newCondition);
+            $("#conditions .Condition").each(FormatConditions);
+            $("#AddCondition").fadeOut();
+        }
+
+        return false;
+    }
+
+    function AddAttribute() {
+        var newattribute = $("#NewAttribute").contents().clone();
+
+        //get count of attributes then increment rename id's and names
+        var count = $("#Attributes .Attribute").length;
+        newattribute.find("label").each(function () { $(this).attr("for", count + "_" + $(this).attr("for")) });
+        newattribute.find("input").each(function () { $(this).attr("id", count + "_" + $(this).attr("id")) });
+        newattribute.find("input").each(function () { $(this).attr("name", count + "_" + $(this).attr("name")) });
+
+        newattribute.find("input:text, input:checkbox").uniform();
+        newattribute.find(".tip").tooltip({
+            showURL: false, delay: 0, track: true, showBody: " - "
+        }); 
+
+        //append
+        $("#Attributes").append(newattribute); 
+
+        return false;
+    }
+
+
+    $().ready(function () {
+
+
+        $("#domain").change(ChangeDomain);
+        domainval = $("#domain").val();
+        if (domainval == "")
+            $(".secondary").hide();
+
+        $("#currentquery").uniform();
+
+
+        $("#AddCondition").click(AddCondition);
+        $("#AddAttribute").click(AddAttribute);
+
+        $("#conditions .Condition").each(function (index) { FormatConditions(index); });
+        $(".remove").remove();
+
+        $("#batch").change(function () {
+            if ($(this).is(":checked")) {
+                $("#Conditions").fadeOut('normal', function () { $("#conditions").html(""); });
+            }
+            else {
+                $("#Conditions").fadeIn(); 
+            }
+        });
+
+
+
+    });                         
+                                     
+</script>
+</head>
+<body nav="navsimpledbmodify" style="position:relative;">
+    [%inc:/a/html/dash/nav.htm%]
+    <div id="Main">
+
+       
+        <div class="middle box  ui-corner-all">
+            <div class="content">
+                <h3>
+                    [%editnew%] Select Query</h3>
+                     [%notification%]
+                <div id="form">
+                   
+                    <form class="formLayout" id="select_form" action="[%action%]" method="post">
+                        <ul>
+                            <li>
+                                <label for="nickname">Nickname for this query:<br /><small>(no spaces or special chars)</small> </label>
+                                <input id="nickname" name="nickname" value="[%nickname%]" type="text" />
+                            </li>
+
+                            <li>
+                                <label for="domain">Domain</label>
+                                <select name="domain" id="domain">
+                                    <option value="">Select a domain</option>
+                                    [%domains_options%]
+                                </select>
+                                <em>*</em> 
+                            </li>
+                            
+                             <li class="secondary">
+                                <br />
+                                <label for="item_name">Item Name:<br /><small>leave blank to make it a parameter, or use a token to make it secure. Tokens: [%inc:/a/html/dash/simpledb/tokens.htm%]</small></label>
+                                <input id="item_name"  name="item_name" value="[%item_name%]"  type="text"  />
+                            </li>
+
+                            
+                             <li class="secondary">
+                                <br />
+                                <label for="delete">Delete:<br /><small>check to make this a delete operation</small></label>
+                                <input id="delete" token="delete" name="delete" value="yes"   type="checkbox" />
+                            </li>
+
+                            
+                             <li class="secondary">
+                                <br />
+                                <label for="batch">Batch:<br /><small>Check to allow batch operations (currently only support the same set of atttibutes for each item in the batch, though you can leave some values blank)</small></label>
+                                <input id="batch" token="batch" name="batch" value="true"type="checkbox"/>
+                            </li>
+
+                        </ul>
+
+
+                            <fieldset class="secondary">
+                            <h3>Attributes</h3>
+                            <p>List of current attributes, feel free to add new ones. (SimpleDB <b>is case sensitive</b>)</p>
+                            <div id="AttributeList">
+                            [%attributeslist%]
+                            </div>
+                            <div id="Attributes">
+                            [%attributes%]
+                            </div>
+                            </fieldset>
+                            <fieldset class="secondary">
+                                <a href="#" id="AddAttribute"><b>+ Add Attribute</b></a>
+                            </fieldset>
+
+                        <br />
+                         
+                        <div id="Conditions" class="secondary">
+                        <fieldset>
+                            <h3>Conditions</h3>
+                            <div id="conditions">
+                            [%Conditions%]
+                            </div>      
+                        </fieldset>
+                        
+                        <fieldset>
+                            <a href="" id="AddCondition"  class="secondary"><b>+ Add Condition <small>(where clause)</small></b></a>
+                        </fieldset>
+                        </div>
+
+                        <ul  >
+				            <li><div class="secondary" ><a href="#" style="float:right;" class="submit" onclick="$('#select_form').submit(); return false;">Save</a></div>
+                                <a href="../" style="float:left;" class="submit">Cancel</a>
+                            </li>
+                        </ul>
+
+                        <div class="clear"></div>
+                    </form>
+                </div>
+                <br />
+                
+                <div id="NewAttribute" class="hidden">
+                    [%inc:/a/html/dash/simpledb/modify-attributes.htm%]
+                </div>
+                <div id="NewCondition" class="hidden">
+                    [%inc:/a/html/dash/simpledb/modify-conditions.htm%]
+                </div>
+
+            </div> 
+        </div> 
+
+    </div>
+    [%footer%]
+    <div class="hidden">
+        <div class="" id="ConfirmDomainChange">
+             <div id="basic-template"> 
+                <p>Changing the domain will result in losing all of the current setting.</p>
+                <button class="confirm  ui-dialog-close">Change Domain</button> <button class="cancel ui-dialog-close">Cancel</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

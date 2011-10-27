@@ -1,0 +1,321 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>ServerCyde - Dashboard</title>[%inc:/a/html/dash/head.htm%] 
+    <script type="text/javascript">
+    var domainval;
+
+    function BuildCurrentQuery() {
+    var cq = $("#currentquery");
+    cq.text("Select");
+    //fields
+    var fields = $("input[name=field]:checked").length;
+    $(".field:checked").each(function (index) {
+        var comma = ","
+        if (fields == (index +1))
+            comma = "";
+        if ($("input[rel='"+$(this).val()+"']").is(':checked'))
+            cq.append(" count(" + $(this).val() + ")" + comma);
+        else
+            cq.append(" " + $(this).val() + "" + comma);
+
+    });
+    //domain
+    cq.append(" from `" + $("#domain").val() + "` ");
+
+    if ($("#conditions .Condition").length > 0)
+        cq.append(" where ");
+
+    $("#conditions .Condition").each(function (index) {
+        if (index > 0)
+            cq.append(" " + $("#" + index + "_or_and_intersect").val());
+
+        if ($("#" + index + "_where_field").val() != null) {
+
+            //field
+            if ($("#" + index + "_every").is(':checked'))
+                cq.append(" every(`" + $("#" + index + "_where_field").val() + "`) ");
+            else
+                cq.append("`" + $("#" + index + "_where_field").val() + "` ");
+
+            cq.append(" " + $("#" + index + "_operator").val() + "");
+
+            var operand1 = $("#" + index + "_const_value_1").val() != "" ? "'" + $("#" + index + "_const_value_1").val().replace("'", "''") + "'" : "$" + $("#" + index + "_where_field").val().replace(" ", "");
+            var operand2 = $("#" + index + "_const_value_2").val() != "" ? "'" + $("#" + index + "_const_value_2").val().replace("'", "''") + "'" : "$" + $("#" + index + "_where_field").val().replace(" ", "") + "2";
+
+            switch ($("#" + index + "_operator").val()) {
+                case "between":
+                    cq.append(" " + operand1 + " and " + operand2);
+                    break;
+                case "in":
+                    cq.append("(" + operand1.replace("''", "'") + ")");
+                    break;
+                case "is null": cq.append("");
+                    break;
+                case "is not null": cq.append("");
+                    break; 
+                default:
+                    cq.append(" " + operand1);
+            }
+        }
+
+    });
+                                         
+    if ($("#sort_by").val() != undefined && $("#sort_by").val() != "")
+        cq.append(" order by `" + $("#sort_by").val() + "` " + $("#sort_order").val());
+
+    if ($("#limit").val() != "")
+        cq.append(" limit " + $("#limit").val());
+
+    cq.val(cq.text());
+    }
+
+
+    function Update() {
+        domainval = $("#domain").val();
+        if (domainval != "") {
+            //populate fields, sorts, wipe conditions, update new condition fields (confirm first if current value != "")  
+            $("#fields").html("<img src='/a/img/ajax-loader.gif' />");
+            $.post("../../../API/GetFields/", { Domain: domainval, Type: "list" }, function (data) {
+                $("#fields").html(data);
+                //$("#fields ul").prepend("<li><input name='field' value='*' type='checkbox' /> * </li>");
+                $("#fields input:checkbox").uniform();
+                $("#fields input:checkbox").change(BuildCurrentQuery);
+
+            });
+            $.post("../../../API/GetFields/", { Domain: domainval, Type: "options" }, function (data) {
+                $("#sort_by").html("<option value=\"\">Don't Sort</option>" + data);
+                $("#where_field").html("<option value=\"\">Select a field</option>" + data);
+            });
+            $(".secondary").fadeIn();
+        }
+        else {
+            $("#fields").html("");
+            $("#sort_by").html("");
+            $(".secondary").fadeOut();
+        }
+        $("#conditions").html("");
+        $("#where_field").html("");
+    }
+
+    function ChangeDomain() {
+
+        $("#ConfirmDomainChange .confirm").click(Update)
+        $("#ConfirmDomainChange .cancel").click(function () {
+            $("#domain").unbind("change")
+            if (domainval == "")
+                $("#domain option:eq(0)").attr("selected", "selected");
+            else
+                $("#domain").find("option:contains(" + domainval + ")").attr("selected", "selected");
+            $("#domain").change(ChangeDomain);
+        });
+
+        if (domainval == "") {
+            Update();
+        }
+        else {
+            var dialog = $("#ConfirmDomainChange").show().dialog({ title: 'Confirm Domain Change' });
+            $(".ui-dialog-close").click(function () { dialog.dialog("close"); });
+        }
+    }
+
+    function FormatConditions(index) {
+        $("#" + index + "_operator").change(function () {
+            if ($("#" + index + "_operator").val() == "between")
+            { $("#" + index + "_li_const_value_2").fadeIn(); $("#" + index + "_li_const_value_1").fadeIn(); }
+            else if ($("#" + index + "_operator").val() == "is null" || $("#" + index + "_operator").val() == "is not null") 
+            { 
+                $("#" + index + "_li_const_value_2").fadeOut();  $("#" + index + "_li_const_value_1").fadeOut(); 
+                $("#" + index + "_const_value_2").val("");  $("#" + index + "_const_value_1").val(""); 
+
+            }
+            else { $("#" + index + "_li_const_value_2").fadeOut(); }
+        }).change();
+    }
+
+    function AddCondition() {
+        var newCondition = $("#NewCondition").contents().clone();
+
+        //get count of conditions then increment rename id's and names
+        var count = $("#conditions .Condition").length;
+        if (count == 0) { newCondition.find(".or_and_intersect").remove(); }
+        newCondition.find(".count").text("Condition " + (count + 1) + ".");
+        newCondition.find("label").each(function () { $(this).attr("for", count + "_" + $(this).attr("for")) });
+        newCondition.find("#li_const_value_2, #li_const_value_1, select, input, textarea").each(function () { $(this).attr("id", count + "_" + $(this).attr("id")) });
+        newCondition.find("select, input, textarea").each(function () { $(this).attr("name", count + "_" + $(this).attr("name")) });
+
+        newCondition.find("input:text, input:checkbox").uniform();
+        newCondition.find(".tip").tooltip({
+            showURL: false, delay: 0, track: true, showBody: " - "
+        });
+        newCondition.find("select, input:checkbox").change(BuildCurrentQuery);
+        newCondition.find("input:text").keyup(BuildCurrentQuery);
+
+        //append
+        $("#conditions").append(newCondition);
+        $("#conditions .Condition").each(function (index) { FormatConditions(index); });
+
+        return false;
+    }
+
+    function ScrollLiveQuery() {
+        var offset = $("#sidebar").offset();
+        var topPadding = 15;
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > offset.top) {
+                $("#sidebar").stop().animate({
+                    marginTop: $(window).scrollTop() - offset.top + topPadding
+                });
+            } else {
+                $("#sidebar").stop().animate({
+                    marginTop: 0
+                });
+            };
+        });
+    }
+
+    $().ready(function () {
+
+
+        $("#domain").change(ChangeDomain);
+        domainval = $("#domain").val();
+        if (domainval == "")
+            $(".secondary").hide();
+
+        $("#currentquery").uniform();
+
+        $("form select, form input, #conditions select, #conditions input:checkbox").change(BuildCurrentQuery);
+        $("input:text").keyup(BuildCurrentQuery);
+        BuildCurrentQuery();
+
+        $("#AddCondition").click(AddCondition);
+        ScrollLiveQuery();
+
+        $("#conditions .Condition").each(function (index) { FormatConditions(index); });
+        $(".remove").remove();
+
+
+
+    });                         
+                                     
+</script>
+</head>
+<body nav="navsimpledbselects" style="position:relative;">
+    [%inc:/a/html/dash/nav.htm%]
+    <div id="Main">
+
+        <div id="sidebar" style="position:absolute; z-index:3000; width:100%;">
+            <div class="middle box secondary  ui-corner-all">
+                <div class="content">
+                    <h3>Current Query: <small>Updates live as you make changes</small></h3> 
+                    <textarea style="height:30px;" id="currentquery">
+                    </textarea>
+                </div>
+            </div>
+        </div>
+        <br class="secondary" />
+        <div class="middle box  ui-corner-all" style="margin-top:120px; position:relative; z-index:1;">
+            <div class="content">
+                <h3>
+                    [%editnew%] Select Query</h3>
+                    <B>Tips</B>
+                    <ul>
+                        <li>Using the like oporator requres the presence of a % in the operand, or it will fails (escape a percent sign with a back slash  For example, to search for a string that ends in '3%', you enter   '%3\%'</li>
+                        <li>Sort by attributes must also be in the where clause</li>
+                        <li>Don't escape quotes, I'll take care of it for you.</li>
+                        <li><a target"_blank" href="http://docs.amazonwebservices.com/AmazonSimpleDB/latest/DeveloperGuide/index.html?Operations.html">more</a></li>
+                    </ul>
+
+                     [%notification%]
+                <div id="form">
+                   
+                    <form class="formLayout" id="select_form" action="[%action%]" method="post">
+                        <ul>
+
+                            <li>
+                                <label for="nickname">Nickname for this query:<br /><small>(no spaces or special chars)</small> </label>
+                                <input id="nickname" name="nickname" value="[%nickname%]" type="text" />
+                            </li>
+
+                            <li>
+                                <label for="domain">Domain</label>
+                                <select name="domain" id="domain">
+                                    <option value="">Select a domain</option>
+                                    [%domains_options%]
+                                </select>
+                                <em>*</em> 
+                            </li>
+                            
+                            <li class="secondary">
+                                <br />
+                                <label for="fields">Select attribute to return:</label>
+                                <div id="fields" style="margin-left:220px;">[%fields%]</div> 
+                            </li>
+                            
+                            <li class="secondary">
+                                <br />
+                                <label for="limit">Limit:<br /><small> (Max results)</small></label>
+                                <input id="limit" name="limit" value="[%limit%]" type="text" />
+                            </li>
+
+                            <li class="secondary">
+                                <br />
+                                <label for="consistent_read">Consistent Read:<br /><small>Only needed for high concurrent reads</small></label>
+                                <input id="consistent_read" token="consistent_read" name="consistent_read" value="true" type="checkbox" />
+                            </li>
+
+                            <li class="secondary">
+                                <label for="sort_by">Sort By</label> 
+                                 <select name="sort_by" id="sort_by">
+                                    <option value="">Don't Sort</option>
+                                    [%sort_by%]
+                                </select>
+                                <select name="sort_order" id="sort_order">
+                                    [%sort_order%]
+                                </select>
+                            </li> 
+
+                        </ul>
+                        <br />
+                         
+                       
+                        <div id="conditions">
+                        [%Conditions%]
+                        </div>
+                        <fieldset>
+                            <a href="" id="AddCondition"  class="secondary"><b>+ Add Condition <small>(where clause)</small></b></a>
+                        </fieldset>
+
+                        
+                        
+                        <ul  >
+				            <li><div class="secondary" ><a href="#" style="float:right;" class="submit" onclick="$('#select_form').submit(); return false;">Save</a></div>
+                                <a href="../" style="float:left;" class="submit">Cancel</a>
+                            </li>
+                        </ul>
+
+                        <div class="clear"></div>
+                    </form>
+                </div>
+                <br />
+                
+                <div id="NewCondition" class="hidden">
+                    [%inc:/a/html/dash/simpledb/select-conditions.htm%]
+                </div>
+
+            </div> 
+        </div> 
+
+    </div>
+    [%footer%]
+    <div class="hidden">
+        <div class="" id="ConfirmDomainChange">
+             <div id="basic-template"> 
+                <p>Changing the domain will result in losing all of the current setting.</p>
+                <button class="confirm  ui-dialog-close">Change Domain</button> <button class="cancel ui-dialog-close">Cancel</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

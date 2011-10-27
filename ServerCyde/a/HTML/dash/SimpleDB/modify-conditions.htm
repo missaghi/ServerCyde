@@ -1,0 +1,20 @@
+﻿<fieldset>
+<ul class="Condition">
+    <a style="float:right;" href="#" onclick="$('#AddCondition').fadeIn(); $(this).closest('fieldset').remove(); return false;"><b>- Remove Condition</b></a>
+    <li>
+        <label for="[%count%]Exists">Check Attribute Exists:<br /><small></small></label>
+        <input token="Existstrue" name="[%count%]Exists" value="true" type="radio" />Yes
+        <input token="Existsfalse" name="[%count%]Exists" value="false" type="radio" />No
+    </li>
+     <li > <div id="[%count%]liexistsattribute">
+        <label for=[%count%]"existsattribute">Attribute Name:</label>
+        <input id="[%count%]existsattribute" name="[%count%]existsattribute" value="[%existsattribute%]" />
+        </div>
+    </li>
+        <li ><div id="[%count%]liexistsvalue">
+        <label for="[%count%]existsvalue">Constant Value: <small>Leave blank to keep it a parameter. Tokens: [&#37;currentuserid&#37;], [&#37;ipaddress&#37;], [&#37;guid&#37;]</small></label>
+        <input id="[%count%]existsvalue" name="existsvalue" value="[%existsvalue%]" />
+        </div>
+    </li> 
+</ul>
+</fieldset>

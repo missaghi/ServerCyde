@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Untitled Page</title>
+</head>
+<body>
+    <h3>Request Type: [%RequestType%]</h3>
+    <br />
+<h3>Test Form</h3>
+    <form method="[%RequestType%]" action="[%URL%]" enctype="multipart/form-data">
+        [%fields%]
+        
+        
+        
+          <br /> File upload (only use for upload calls)<br />
+        <input type="file"  name="additem_image"/>
+        
+        <input type="submit" value="submit" />
+        
+      
+        
+    </form>
+    
+    <h3>Returns:</h3>
+    
+</body>
+</html>

@@ -1,0 +1,15 @@
+﻿body  { 
+	color: #333;
+	text-align: left;
+	font: small/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+html>body  {
+	font-size: 13px;
+}
+
+h3  {color:#5599bb; font-size:110%; font-weight:bold;margin-bottom:5px;}
+h2  {color:#789E1B; font-size:125%; margin-bottom:5px;}
+h1  {color:#224466;font-size:175%; margin-bottom:10px;}
+
+.hidden {display:none;}

@@ -1,0 +1,257 @@
+﻿<!DOCTYPE html>
+<html dir="ltr" lang="en-US" itemscope itemtype="http://schema.org/Product">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="A Javascript framework designed to let you build your entire site in Javascript and still access databases and send emails" />
+    <title>ServerCyde</title>[%inc:/a/html/public/head.html%]
+    <script type='text/javascript' src='/a/js/saas.twitter.js?ver=3.0'></script>
+    <!--
+    <script type="text/javascript" src="http://comet.servercyde.com/comet/3/"></script>-->
+    
+   <script type="text/javascript">
+       $().ready(function () {
+           $(".features3 li").append('<img src="/a/img/footer.png"  style="position:absolute;bottom:-5px; width:300px; height:5px; left:-10px;"  />');
+           $("h3.callout").append('<img src="/a/img/footer.png"  style="position:absolute;bottom:-10px; width:100.9%; height:10px; left:-7px;"  />');
+       });
+</script>
+
+<style>
+
+ .features3 li
+        {
+            height:390px; 
+        }
+</style>
+
+</head>
+<body class=" page  ">
+    <div class="header">
+        <div>
+            <div class="center">
+                [%inc:/a/html/public/header.html%]
+            </div>
+        </div>
+    </div>
+    <!--div.header end -->
+    <!--div.container start -->
+    <div class="container">
+        <div class="center">
+            
+
+             <h2 style="border: none; text-align: left; font-size: 28px; margin-top: 10px; margin-bottom:10px; color:#0A5477;">
+                Add Server Features to Your Site in Minutes with Zero Server Code!</h2>
+            <h3 style="border: none; text-align: left; font-size: 15px; color: #444;">
+               Build features for the <u>most platforms</u>, in the least amount of time, with only one language and <i>zero server configuration</i>.</h3>
+               <br />
+               <p>Servercyde makes it so much easier to build database driven apps. You can add these to any site even those on the cheapest hosting or even a Wordpress/Blogger blog. Our API manages user sessions and database connections so that you can code everything else with one client side language: JavaScript.</p>
+
+           
+            <div class="features3">
+                <ul>
+                    <li>
+                        
+                        <div class="content">
+                            
+                            
+                            <h3>
+                                WordPress Magic    <img src="/a/img/wordpress.png" style=" vertical-align:middle;"   /></h3>
+                            <p>
+                                You won't have to deal with fancy hosting or learn any new languages to add custom functionality. <b style="color:#f00;">Your customers will LOVE you</b> for delivering so much in so little time.
+                                </p>
+                                <br />
+                            <h3>
+                                Show off your skills</h3>
+                            <p>
+                                It's all Javascript so it doesn't matter if your site is static HTML, a WordPress hosted site, or even .net or php. <u>You can have custom functionality quickly and cheaply</u>.
+                                <!--<img src="/a/img/microsoft-.net-framework-4.png" />
+                                <img src="/a/img/php.png" />-->
+                                </p><br />
+
+                                <img src="/a/img/facebook-logo.png" style="float:right;" />
+                                <img src="/a/img/twitter-logo.png" style="float:right;" />
+                            <h3>
+                                Enlarge your toolkit</h3>
+                            <p>
+                                On top of DB access you get user authentication, Facebook Connect, Messaging, <b>EMAILS,</b> custom API's.
+                                <br />
+                            </p>
+
+                        </div>
+                    </li>
+                    <li>
+                        
+                        <div class="content">
+                            <h3>Mobile Devices</h3>
+                            <p>HTML + Javascript runs on virtually every device and it's easy to convert to an iPhone or Android app with third part tools like PhoneGap.</p>
+                            <img src="/a/img/mobile_logos.png" style="margin-bottom:10px;" /><br />
+                            <img src="/a/img/iphone4_white.png" style="margin-right:10px;" />
+                            <img src="/a/img/nexus-one.png" />
+                        </div>
+                    </li>
+                    <li>
+                       
+                        <div class="content">
+                            <h3>Data Storage <img src="/a/img/amazon.png" style=" float:right;"   /></h3>
+                            <p>Using our simple GUI you can build easy access to a real DataBase on Amazon SimpleDB</p>
+
+                                <br />
+                            
+                            <h3>Real Time Messaging</h3>
+                            <p>Easily add real time chat, live news feeds, or any up to the second service with only a few lines of JavaScript</p>
+
+                                <br />
+                            
+                            <h3>Social Authentication</h3>
+                            <p>Add member signup with automatic email confirmation or simply use Facebook connect to setup a custom experience for each of your users.
+                                <img src="/a/img/facebook-connect-logo.jpg" style="height:25px; width:100px; vertical-align:top;"  />
+                                
+                            </p>
+
+                        </div>
+                    </li>
+                </ul>
+                <div class="clear">
+                </div>
+            </div> 
+
+
+             </div>
+ <div class="clear">
+                </div>
+
+              <style type="text/css">
+                #stepswrapper {display:block; width:940px; height:220px; margin-top:10px; margin-bottom:10px; position:relative; }
+                #steps { display:block;   width:940px; height:220px; border:1px solid #ccc;  background:#fff; overflow:hidden;} 
+                /*#steps .step { position:absolute; top:0px;}*/
+                #steps .title {background:#999; width:23px; padding:5px; padding-top:15px; float:left;  height:200px; margin:0;}
+                #steps .slide { margin-left:10px; height:220px; width:847px; width:1px;  overflow:hidden; display:inline-block;float:left;}
+                
+            </style>
+            <script type="text/javascript">
+                $().ready(function () {
+
+                    $(".title").click(function () {
+                        unclicked = false;
+
+                        $(".title").removeClass("selected");
+                        $(this).addClass("selected");
+
+                        $(this).closest(".step").siblings().find(".slide").animate({ width: 0 }, 500, "linear", 500, "linear");
+                        $(this).closest(".step").siblings().find(".title").animate({ 'background-color': '#ccccc' }, 500, "linear");
+                        $(this).closest(".step").find(".slide1").animate({ width: '854px' }, 500, "linear");
+                        $(this).closest(".step").find(".slide2").animate({ width: '803px' }, 500, "linear");
+                        $(this).closest(".step").find(".title").animate({ 'background-color': '#999999;' }, 500, "linear")
+                    });
+
+                    $(".title:first").click();
+
+                    var unclicked = true;
+
+                    function Switch() {
+
+                        if (unclicked) {
+                            $(".title:not(.selected)").click();
+                            unclicked = true;
+                            setTimeout(Switch, 6000);
+                        }
+
+                    }
+
+                    setTimeout(Switch, 6000);
+
+                });
+            </script>
+        <div style="background:url(/a/img/gradtop.gif) repeat-x top #e3e4e5 ; margin-top:20px;">
+        <div style="background:url(/a/img/gradbottom.gif) repeat-x bottom; padding:20px;">
+            <div class="center">
+            <div id="stepswrapper">
+                <div id="steps">
+                    <div class="step">
+                        <div class="title">
+                            <img src="/a/img/step1button.png" /></div>
+                        <div class="slide slide1"><div style="width:900px;">
+                            <img src="/a/img/step1.png" />
+                            <img src="/a/img/screenshot1thumb.png" style="cursor:pointer;" onclick="$('#screenshot1').dialog({title:'Select query builder', width:1223, height:923 }); return false;"  />
+                            <div class="hidden"><div id="screenshot1"><img src="/a/img/screenshot1.png" /></div></div>
+                            <img src="/a/img/screenshotthumb2.png" style="cursor:pointer;" onclick="$('#screenshot2').dialog({title:'Testing User Authentication Calls', width:1223, height:923 }); return false;"  />
+                            <div class="hidden"><div id="screenshot2"><img src="/a/img/screenshot2.png" /></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="title">
+                            <img src="/a/img/step2button.png" /></div>
+                        <div class="slide slide2">
+                            <img src="/a/img/step2.png" /></div>
+                    </div>
+                </div>
+                 <div class="clear">
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+        
+        
+        <div class="center">
+
+
+                    <h3 class="callout"  style="color:#444; background:#eff3ff; border-left-color:#ced7de;"> 
+                        
+                        <div style="float:right; text-decoration:underline;"><a href="/showcase/">See Current Partners</a></div>
+
+                        <span style="text-decoration:line-through; color:#999;">During Beta we will build a demo of your site on our dime</span> FULL!<br />
+                        <small style="font-weight:normal; font-size:13px; margin-top:15px;">
+                        You can build anything with ServerCyde, <b>realtime stock tickers</b>, social platforms with chat, <u>voting systems</u>, banking platforms, quick widgets to collect data, <u>scheduling or appointment tool</u>, really any site that needs some extra functionality...
+                        </small>
+                        <br /><br />Get help!                        
+                        <small style="font-weight:normal; font-size:13px;">Using ServerCyde API to build apps is so easy and fun that there are developers just waiting to help you out. Send us an email with your needs and we'll get you a free quote: <a href="mailto:servercyde.com">support@serverCyde.com</a></small></h3>
+
+
+
+
+
+          
+                     
+
+             <div class="tweets">
+                <div>
+                    <strong class="ServerCyde">TWITTER</strong> <span class="tweet">Loading tweet... <a
+                        class="view-more" href="#">View More &raquo;</a></span>
+                </div>
+            </div>
+            <div class="clear"></div> 
+         <br />
+    </div>
+    <!--div.container end --> [%inc:/a/html/public/footer.html%] <div id="badge" style="display:
+    none;"> &lt;div class=&quot;notice&quot;&gt; &lt;div class=&quot;achievements&quot;&gt;
+    &lt;h3 style=&quot;&quot;&gt; Congratulations. You&#39;ve earned 1 new badge for
+    discovering us before launch! : &lt;/h3&gt; &lt;div class=&quot;social_buttons&quot;
+    style=&quot;&quot;&gt; &lt;span class=&quot;badge tip&quot; title=&quot;Discoverer
+    - Someone who found the site before official launch!&quot; style=&quot;float: left;&quot;&gt;
+    &lt;img alt=&quot;earlyadopterbadge&quot; style=&quot;height: 30px; width: 30px;
+    margin-left: 10px; margin-right: 10px;&quot; src=&quot;/a/img/badges/noob.png&quot;&gt;
+    &lt;/span&gt; &lt;div class=&quot;social_button&quot; type=&quot;email&quot;&gt;
+    &lt;a class=&quot;email rounded&quot; style=&quot;color: #555;&quot; href=&quot;mailto:?Subject=Make%20a%20web%20app&amp;amp;Body=http://servercyde.com/&quot;&gt;
+    Email&lt;/a&gt; &lt;/div&gt; &lt;!-- Facebook --&gt; &lt;div class=&quot;social_button&quot;
+    type=&quot;facebook&quot;&gt; &lt;iframe src=&quot;http://www.facebook.com/plugins/like.php?app_id=177998372253839&amp;amp;href=http%3A%2F%2Fservercyde.com&amp;amp;send=false&amp;amp;layout=button_count&amp;amp;width=90&amp;amp;show_faces=false&amp;amp;action=like&amp;amp;colorscheme=light&amp;amp;font&amp;amp;height=20&quot;
+    scrolling=&quot;no&quot; frameborder=&quot;0&quot; style=&quot;border: none; overflow:
+    hidden; width: 90px; height: 20px;&quot; allowtransparency=&quot;true&quot;&gt;&lt;/iframe&gt;
+    &lt;/div&gt; &lt;!-- Twitter --&gt; &lt;div class=&quot;social_button&quot; type=&quot;twitter&quot;&gt;
+    &lt;iframe title=&quot;Twitter For Websites: Tweet Button&quot; style=&quot;width:
+    110px; height: 20px; margin-left: -8px;&quot; class=&quot;twitter-share-button twitter-count-horizontal&quot;
+    src=&quot;http://platform.twitter.com/widgets/tweet_button.html#_=1314117292671&amp;amp;count=horizontal&amp;amp;id=twitter_tweet_button_0&amp;amp;lang=en&amp;amp;original_referer=http%3A%2F%2Fservercyde.com%2F%23%21%2Fexercise%2F4&amp;amp;text=ServerCyde%20is%20the%20easiest%20way%20to%20build%20a%20web%20app.&amp;amp;url=http%3A%2F%2Fservercyde.com&amp;amp;via=ServerCyde&quot;
+    allowtransparency=&quot;true&quot; frameborder=&quot;0&quot; scrolling=&quot;no&quot;&gt;&lt;/iframe&gt;
+    &lt;/div&gt; &lt;!-- Google Plus One --&gt; &lt;div class=&quot;social_button&quot;
+    type=&quot;google&quot;&gt; &lt;div style=&quot;height: 20px; width: 90px; display:
+    inline-block; text-indent: 0pt; margin: 0pt; padding: 0pt; background: none repeat
+    scroll 0% 0% transparent; border-style: none; float: none;&quot; id=&quot;___plusone_0&quot;&gt;
+    &lt;iframe allowtransparency=&quot;true&quot; hspace=&quot;0&quot; id=&quot;I2_1314117292725&quot;
+    marginheight=&quot;0&quot; marginwidth=&quot;0&quot; name=&quot;I2_1314117292725&quot;
+    src=&quot;https://plusone.google.com/u/0/_/+1/fastbutton?url=http%3A%2F%2Fservercyde.com&amp;amp;size=medium&amp;amp;count=true&amp;amp;annotation=&amp;amp;hl=en-US&amp;amp;jsh=r%3Bgc%2F23217085-590ae8cc#id=I2_1314117292725&amp;amp;parent=http%3A%2F%2Fservercyde.com&amp;amp;rpctoken=302206043&amp;amp;_methods=onPlusOne%2C_ready%2C_close%2C_open%2C_resizeMe&quot;
+    style=&quot;position: static; left: 0pt; top: 0pt; width: 90px; height: 20px; visibility:
+    visible;&quot; tabindex=&quot;-1&quot; vspace=&quot;0&quot; frameborder=&quot;0&quot;
+    scrolling=&quot;no&quot; width=&quot;100%&quot;&gt;&lt;/iframe&gt; &lt;/div&gt;
+    &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; </div>
+</body>
+</html>

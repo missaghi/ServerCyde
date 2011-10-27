@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>ServerCyde - Dashboard</title>[%inc:/a/html/dash/head.htm%] 
+    <link rel="stylesheet" type="text/css" href="/a/JS/markitup/skins/markitup/style.css" />
+    <link rel="stylesheet" type="text/css" href="/a/JS/markitup/sets/html/style.css" />
+    <script src="/a/JS/markitup/jquery.markitup.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/a/JS/markitup/sets/html/set.js"></script>
+    <script language="javascript">
+        $(document).ready(function () {
+            $('#html').markItUp(mySettings);
+        });
+    </script>
+    <style type="text/css"> 
+        .formLayout .markItUp ul, .formLayout .markItUp ul li {clear:none; display:block; width:auto;}
+        .formLayout .markItUp textarea {width:643px;}
+        h4 {color:#555; padding:0; margin:0;   font-size:105%;}
+    </style>
+</head>
+<body nav="navAPIs" style="position:relative;">
+    [%inc:/a/html/dash/nav.htm%]
+    <div id="Main">
+
+       
+        <div class="middle box  ui-corner-all">
+            <div class="content">
+                    <h2>Instructions</h2>
+                <p>
+                    <h4>Server Tokens</h4><br />
+                    [&#37;currentusername&#37;], [&#37;currentuserid&#37;], [&#37;user0name&#37;], [&#37;user1name&#37;] <br />
+                </p>
+                <p>
+                    <h4>Custom Tokens</h4><br />
+                    [&#37;parameternamehere&#37;] pasting this into your URL will get the token replaced at runtime
+                </p>
+                <p>
+                    <h4>Example URL</h4> 
+                    http://facebook.com/me/?token=876iuygi78t&personname=[&#37;currentusername&#37;]&someotherparamete=[&#37;someotherparameter&#37;]</em>,
+                    <br />
+                [%notification%]
+                <div id="form">
+                    <form class="formLayout" id="select_form" action="[%action%]" method="post">
+                       <h3>
+                        [%editnew%] API Call</h3>
+                    
+                        <ul>
+                            <li>
+                                <label for="nickname">Nickname for this call:<br /><small>(no spaces or special chars)</small> </label>
+                                <input id="nickname" name="nickname" value="[%nickname%]" type="text" />
+                            </li>
+                            <li>
+                                <label for="url">URL:</label>
+                                <textarea id="url" cols="80" rows="5" style="height:100px;" name="url">[%url%]</textarea>
+                            </li>
+                            <li>
+                                <label for="Useragent">Useragent:<br /><small>blank for default</small> </label>
+                                <input id="Useragent" name="Useragent"   value="[%Useragent%]" type="text" />
+                            </li>
+                            <li>
+                                <label for="Port">Port:<br /><small>blank for default based on URL</small> </label>
+                                <input id="Port" name="Port"  value="[%Port%]" type="text" />
+                            </li>
+                            <li>
+                                <label for="return_type">Return Type:<br /><small>blank for default based on URL</small> </label>
+                                <input id="return_type" name="return_type"  value="[%return_type%]" type="text" />
+                            </li>
+                            <li>
+                                <label for="method">Method:<br /><small>POST or GET</small> </label>
+                                <input id="method" name="method"  value="[%method%]" type="text" />
+                            </li>
+                            <li>
+                                <label for="content_type">content_type:<br /><small>blank for default</small> </label>
+                                <input id="content_type" name="content_type"  value="[%content_type%]" type="text" />
+                            </li>
+                            <li>
+                                <label for="Cookie">Cookie:<br /><small>(optional)</small> </label>
+                                <input id="Cookie" name="Cookie"  value="[%Cookie%]" type="text" />
+                            </li>
+                            <li>
+                                <label for="Accept">Accept:<br /><small>(optional)</small> </label>
+                                <input id="Accept" name="Accept"  value="[%Accept%]" type="text" />
+                            </li>
+
+                        </ul> 
+                        <ul>
+				            <li><div class="secondary" ><a href="#" style="float:right;" class="submit" onclick="$('#select_form').submit(); return false;">Save</a></div>
+                                <a href="../../" style="float:left;" class="submit">Cancel</a>
+                            </li>
+                        </ul>
+
+                        <div class="clear"></div>
+                    </form>
+                </div> 
+            </div> 
+        </div> 
+
+    </div>
+    [%footer%]
+    
+</body>
+</html>

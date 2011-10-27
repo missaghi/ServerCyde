@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>ServerCyde - Dashboard</title>[%inc:/a/html/dash/head.htm%] 
+    <link rel="stylesheet" type="text/css" href="/a/JS/markitup/skins/markitup/style.css" />
+    <link rel="stylesheet" type="text/css" href="/a/JS/markitup/sets/html/style.css" />
+    <script src="/a/JS/markitup/jquery.markitup.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/a/JS/markitup/sets/html/set.js"></script>
+    <script language="javascript">
+        $(document).ready(function () {
+            $('#html').markItUp(mySettings);
+        });
+    </script>
+    <style type="text/css"> 
+        .formLayout .markItUp ul, .formLayout .markItUp ul li {clear:none; display:block; width:auto;}
+        .formLayout .markItUp textarea {width:643px;}
+        h4 {color:#555; padding:0; margin:0;   font-size:105%;}
+    </style>
+</head>
+<body nav="navemail" style="position:relative;">
+    [%inc:/a/html/dash/nav.htm%]
+    <div id="Main">
+
+       
+        <div class="middle box  ui-corner-all">
+            <div class="content">
+                    <h2>Instructions</h2>
+                <p>
+                    <h4>Server Tokens</h4><br />
+                    [&#37;currentusername&#37;], [&#37;currentuserid&#37;], [&#37;user0name&#37;], [&#37;user1name&#37;] <br />
+                </p>
+                <p>
+                    <h4>Custom Tokens</h4><br />
+                    [&#37;parameternamehere&#37;] <small>To prevent spam abuse we limit the length of data
+                        that can be passed though a custome token to 50 charachters.</small><br />
+                </p>
+                <p>
+                    <h4>Example Email Template</h4> 
+                    Dear <em>[&#37;currentusername&#37;]</em>,
+                    <br />
+                    <em>[&#37;user0name&#37;]</em> has left a message on your wall.<br /> "<em>[&#37;message_excerpt&#37;]</em>"...<b>&lt;</b>a
+                    href="http://yourcoolsite.com/wall/?userid=<em>[&#37;currentuserid&#37;]</em>"<b>&gt;</b><a href="#">Read More</a><b>&lt;</b>/a<b>&gt;</b><br />
+                    Thanks!</p>
+                    <br />
+                    <br />
+                [%notification%]
+                <div id="form">
+                    <form class="formLayout" id="select_form" action="[%action%]" method="post">
+                       <h3>
+                        [%editnew%] Email Template</h3>
+                    
+                        <ul>
+                            <li>
+                                <label for="nickname">Nickname for this template:<br /><small>(no spaces or special chars)</small> </label>
+                                <input id="nickname" name="nickname" value="[%nickname%]" type="text" />
+                            </li>
+                            <li>
+                                <label for="subject">Subject:</label>
+                                <input id="subject" name="subject" value="[%subject%]" type="text" />
+                            </li>
+                            <li>
+                                <label for="ishtml">Send HTML:<br /><small>Check to send email as HTML</small> </label>
+                                <input id="ishtml" name="ishtml" token="ishtml" value="true" type="checkbox" />
+                            </li>
+
+                        </ul>
+                        <div style="margin-left:25px;">
+                        <b>Tip</b><br />The green check mark will preview the HTML<br />
+                        <textarea id="html" cols="80" rows="20" name="emailtemplate">[%emailtemplate%]</textarea>
+                        </div>
+                        <ul>
+				            <li><div class="secondary" ><a href="#" style="float:right;" class="submit" onclick="$('#select_form').submit(); return false;">Save</a></div>
+                                <a href="../../" style="float:left;" class="submit">Cancel</a>
+                            </li>
+                        </ul>
+
+                        <div class="clear"></div>
+                    </form>
+                </div> 
+            </div> 
+        </div> 
+
+    </div>
+    [%footer%]
+    
+</body>
+</html>

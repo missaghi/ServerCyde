@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>ServerCyde - Dashboard</title>[%inc:/a/html/dash/head.htm%] 
+    <script type="text/javascript">
+    
+    </script>
+ </head>
+<body nav="navsimpledbselects" style="position:relative;">
+    [%inc:/a/html/dash/nav.htm%]
+    <div id="Main">
+
+        <div class="middle box  ui-corner-all">
+            <div class="content">
+                    [%notification%]
+
+                    <div style="float:right;  "><a href="./0/" class=""><b>+ Add Query</b></a></div>
+                <h3>
+                    Select Querys</h3>
+                    <hr />
+                <ul>
+                    [%queries%]
+                </ul>
+
+            </div> 
+        </div> 
+
+    </div>
+    [%footer%]
+    <div class="hidden">
+        <div class="" id="ConfirmDomainChange">
+             <div id="basic-template"> 
+                <p>Changing the domain will result in losing all of the current setting.</p>
+                <button class="confirm  ui-dialog-close">Change Domain</button> <button class="cancel ui-dialog-close">Cancel</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

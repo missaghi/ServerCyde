@@ -1,0 +1,233 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="/a/css/dash-style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.js"></script>
+    <script type="text/javascript" src="http://api.servercyde.com/api/3/"></script>
+    <script type="text/javascript">
+
+        function GetUsersResultHandler(data) {
+            $("#ProcName").html("<h3>JSON result of: " + data.ProcName + "</h3><pre></pre>");
+            $("pre").text('{"val":{"Errors":[],"Valid":true},"ProcName":"GetUsers","Result":[{"Attributes":[{"Name":"FirstName","Value":"Doud"}],"Name":"0"}]}');
+
+            $.each(data.Result, function (i, item) {
+                $("#Result").append($("<b>").text(i + " : " + item.Name));
+                var ul = $("<ul>");
+                $.each(item.Attributes, function (a, attribute) {
+                    ul.append($("<li>").text(attribute.Name + " : " + attribute.Value));
+                });
+                $("#Result").append(ul);
+            });
+        }
+
+        function CustomErrorHandler(data) {
+            alert("CustomErrorHandler:" + data.val.Errors.join("<br />"));
+        };
+
+
+        function testSelect() {
+            ServerCyde.SimpleDB.Select.GetUsers({ "firstname": "example" }, GetUsersResultHandler, CustomErrorHandler);
+        }
+
+        $().ready(function () {
+
+            // This line is running a select query on the SimplDB database with a passesd in parameter
+            // and then displying it using the function above
+
+            //ServerCyde.SimpleDB.Select.GetUsers({ "firstname": "example" }, GetUsersResultHandler, CustomErrorHandler);
+
+            // Sending a message to anyone subscribed to comet channel 1 for your site 
+            ServerCyde.Comet.Publish(1, "New person online!", null);
+
+            // Subscribe to channel 1 and alert the messages
+            function Subscribe() { ServerCyde.Comet.Subscribe(1, function (data) { alert("subscribe:" + data); }); }
+
+            setTimeout(Subscribe, 100);
+
+
+
+        });
+
+    </script>
+    <style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.javascript  {font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f5f5f5; padding:20px;}
+.javascript a:link {color: #000060;}
+.javascript a:hover {background-color: #f0f000;}
+.javascript .imp {font-weight: bold; color: red;}
+.javascript .kw1 {color: #000066; font-weight: bold;}
+.javascript .kw2 {color: #003366; font-weight: bold;}
+.javascript .kw3 {color: #000066;}
+.javascript .co1 {color: #006600; font-style: italic;}
+.javascript .co2 {color: #009966; font-style: italic;}
+.javascript .coMULTI {color: #006600; font-style: italic;}
+.javascript .es0 {color: #000099; font-weight: bold;}
+.javascript .br0 {color: #009900;}
+.javascript .sy0 {color: #339933;}
+.javascript .st0 {color: #3366CC;}
+.javascript .nu0 {color: #CC0000;}
+.javascript .me1 {color: #660066;}
+.javascript span.xtra { display:block; }
+--!></style>
+</head>
+<body>
+    <h1>
+        ServerCyde 0.1.5 Demo's</h1>
+
+        <ul>
+            <li><a href="#simpledb"><b>DataBase</b></a><br /> Connecting to amazon SimpleDB with only client side code!<br /><br /></li>
+            <li><a href="#comet"><b>Comet</b></a><br />Harness the instant gratification of Comet with only 2 lines of client side code<br /><br /></li>
+            <li><a href="#session"><b>Authentication</b></a><br />All of the boilerplate code for session management, signup, password resets; a thing of the past.<br /><br /></li>
+            <li><a href="#email"><b>Emails</b></a><br />Create email templates then be able to pass in some tokens and trigger them from the browser.</li>
+            <li><b>Example Site:</b> <a href="http://scan2chat.com/?=6D">Realtime Chat</a></li>
+        </ul> 
+
+        <p>Online syntax highliting courtesy of: <a href="http://quickhighlighter.com">http://quickhighlighter.com</a></p>
+
+
+
+          <a name="comet"></a><br />
+  <div class="jquery" style=" color: #006; border: 1px solid #d0d0d0;
+        background-color: #eee; padding: 10px;">
+        <h2>
+            Comet</h2>
+
+            <a target="_blank" href="/a/html/sandbox/sandbox.htm">Click here to open this page in
+            a <b>new window notjust a new tab</b> to demonstrate the COMET in action.</a><br /><br />
+            Or enter a message to send to everyone viewing this page right now: 
+
+             <form method="POST" action=""  >
+
+                <textarea id="CometMessage" name="message"></textarea>
+                        
+                <input type="submit"  value="Send Message" onclick="ServerCyde.Comet.Publish(1, $('#CometMessage').val()); return false;" />
+        
+            </form>
+
+
+            <div class="javascript"><span class="co1">// Sending a message to anyone subscribed to comet channel 1 for your site </span><br />
+ServerCyde.<span class="me1">Comet</span>.<span class="me1">Publish</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span> <span class="st0">&quot;New person online!&quot;</span><span class="sy0">,</span> <span class="kw2">null</span><span class="sy0">,</span> <span class="kw2">function</span> <span class="br0">&#40;</span>data<span class="br0">&#41;</span> <span class="br0">&#123;</span> <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+<br />
+<span class="co1">// Subscribe to channel 1 and alert the messages</span><br />
+ServerCyde.<span class="me1">Comet</span>.<span class="me1">Subscribe</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span> <span class="kw2">function</span> <span class="br0">&#40;</span>data<span class="br0">&#41;</span> <span class="br0">&#123;</span> <span class="kw3">alert</span><span class="br0">&#40;</span><span class="st0">&quot;subscribe:&quot;</span> <span class="sy0">+</span> data<span class="br0">&#41;</span><span class="sy0">;</span> <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span></div>
+
+        
+    </div>
+
+
+
+        <a name="simpledb"></a>
+ <br />
+    <div class="jquery" style=" color: #006; border: 1px solid #d0d0d0;
+        background-color: #eee; padding: 10px;">
+        <h2>
+            Amazon SimpleDB Select Query</h2>
+        
+
+        <div class="javascript"><span class="co1">// Make call to Amazon SimplDB database with a passesd in parameter.</span><br />
+ServerCyde.<span class="me1">SimpleDB</span>.<span class="me1">Select</span>.<span class="me1">GetUsers</span><span class="br0">&#40;</span><span class="br0">&#123;</span> <span class="st0">&quot;lastname&quot;</span><span class="sy0">:</span> <span class="st0">&quot;%ronomy&quot;</span> <span class="br0">&#125;</span><span class="sy0">,</span> GetUsersResultHandler<span class="sy0">,</span> CustomErrorHandler<span class="br0">&#41;</span><span class="sy0">;</span><br />
+<br />
+<span class="co1">// Function to display Results</span><br />
+<span class="kw2">function</span> GetUsersResultHandler<span class="br0">&#40;</span>data<span class="br0">&#41;</span> <span class="br0">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br />
+&nbsp; &nbsp; $.<span class="me1">each</span><span class="br0">&#40;</span>data.<span class="me1">Result</span><span class="sy0">,</span> <span class="kw2">function</span> <span class="br0">&#40;</span>i<span class="sy0">,</span> <span class="kw1">item</span><span class="br0">&#41;</span> <span class="br0">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; $<span class="br0">&#40;</span><span class="st0">&quot;#Result&quot;</span><span class="br0">&#41;</span>.<span class="me1">append</span><span class="br0">&#40;</span> $<span class="br0">&#40;</span><span class="st0">&quot;&lt;b&gt;&quot;</span><span class="br0">&#41;</span>.<span class="me1">text</span><span class="br0">&#40;</span>i <span class="sy0">+</span> <span class="st0">&quot; : &quot;</span> <span class="sy0">+</span> <span class="kw1">item</span>.<span class="kw3">Name</span><span class="br0">&#41;</span> <span class="br0">&#41;</span><span class="sy0">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="kw2">var</span> ul <span class="sy0">=</span> $<span class="br0">&#40;</span><span class="st0">&quot;&lt;ul&gt;&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; $.<span class="me1">each</span><span class="br0">&#40;</span><span class="kw1">item</span>.<span class="me1">Attributes</span><span class="sy0">,</span> <span class="kw2">function</span> <span class="br0">&#40;</span>a<span class="sy0">,</span> attribute<span class="br0">&#41;</span> <span class="br0">&#123;</span> <br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ul.<span class="me1">append</span><span class="br0">&#40;</span>$<span class="br0">&#40;</span><span class="st0">&quot;&lt;li&gt;&quot;</span><span class="br0">&#41;</span>.<span class="me1">text</span><span class="br0">&#40;</span>attribute.<span class="kw3">Name</span> <span class="sy0">+</span> <span class="st0">&quot; : &quot;</span> <span class="sy0">+</span> attribute.<span class="me1">Value</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; $<span class="br0">&#40;</span><span class="st0">&quot;#Result&quot;</span><span class="br0">&#41;</span>.<span class="me1">append</span><span class="br0">&#40;</span>ul<span class="br0">&#41;</span><span class="sy0">;</span><br />
+&nbsp; &nbsp; <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+<span class="br0">&#125;</span><br />
+<br />
+<span class="co1">//Example of an error handler</span><br />
+<span class="kw2">function</span> CustomErrorHandler<span class="br0">&#40;</span>data<span class="br0">&#41;</span> <span class="br0">&#123;</span> <br />
+&nbsp; &nbsp; <span class="kw3">alert</span><span class="br0">&#40;</span><span class="st0">&quot;CustomErrorHandler:&quot;</span> <span class="sy0">+</span> data.<span class="me1">val</span>.<span class="me1">Errors</span>.<span class="me1">join</span><span class="br0">&#40;</span><span class="st0">&quot;&lt;br /&gt;&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span><br />
+<span class="br0">&#125;</span><span class="sy0">;</span></div>
+
+<input type="button" value="test" onclick="testSelect(); return false;" />
+
+<div id="ProcName">
+        </div>
+        <div id="Result">
+        </div>
+
+    </div>
+  
+    
+    <a name="session"></a><br />
+      <div class="jquery" style=" color: #006; border: 1px solid #d0d0d0;
+        background-color: #eee; padding: 10px;">
+        <h2>
+            Session Management</h2>
+
+            <h3>Sign Up / In Form</h3>
+            <form id="SignUpForm" method="POST" action="" >
+
+                <label>Email</label><br /><input name="email" value="" /><br /><label>Name</label><br /><input name="name" value="" /><br /><label>Password</label><br /><input name="password" value="" type="password" /><br /><label>Remember Me</label> <input name="rememberme" value="true" type="checkbox" /><br />
+        
+                <input type="submit" id="SignupButton" value="SignUp" onclick="$(this).attr('disabled', 'disabled'); ServerCyde.User.SignUp($('#SignUpForm').serialize(), function() {alert('You have been signed up, you will recieve an email to confirm.');  $('#SignupButton').removeAttr('disabled');  }, function(data) { alert('CustomErrorHandler:' + data.val.Errors.join('\n\n'));  $('#SignupButton').removeAttr('disabled');  }); return false;" />
+        
+            </form>
+
+              <br />
+            <div class="javascript">ServerCyde.<span class="me1">User</span>.<span class="me1">SignUp</span><span class="br0">&#40;</span>data<span class="sy0">,</span> <span class="kw2">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span><span class="kw3">alert</span><span class="br0">&#40;</span><span class="st0">'You have been signed up, you will recieve an email to confirm.'</span><span class="br0">&#41;</span><span class="sy0">;</span><span class="br0">&#125;</span><span class="sy0">,</span> <span class="kw2">null</span><span class="br0">&#41;</span><span class="sy0">;</span></div>
+        
+
+
+            <h3>or Sign up / in with Facebook</h3>
+            <input type="button" id="fbconnect" value="FBConnect" onclick="$(this).attr('disabled', 'disabled'); ServerCyde.User.oAuth.Facebook('offline_access',function() {alert('You have been signed up and in!');  $('#fbconnect').removeAttr('disabled');  }, function(data) { alert('CustomErrorHandler:' + data.val.Errors.join('\n\n'));  $('#fbconnect').removeAttr('disabled');  }); return false;" />
+            <br />
+            <div class="javascript" style="font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f0f0f0;">ServerCyde.<span style="color: #660066;">User</span>.<span style="color: #660066;">oAuth</span>.<span style="color: #660066;">Facebook</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'offline_access'</span><span style="color: #339933;">,</span><span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span><span style="color: #000066;">alert</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'You have been signed up and in!'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> &nbsp;$<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'#SignupButton'</span><span style="color: #009900;">&#41;</span>.<span style="color: #660066;">removeAttr</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'disabled'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> &nbsp;<span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span> <span style="color: #003366; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span>data<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> <span style="color: #000066;">alert</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'CustomErrorHandler:'</span> <span style="color: #339933;">+</span> data.<span style="color: #660066;">val</span>.<span style="color: #660066;">Errors</span>.<span style="color: #660066;">join</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'<span style="color: #000099; font-weight: bold;">\n</span><span style="color: #000099; font-weight: bold;">\n</span>'</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> &nbsp;$<span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'#SignupButton'</span><span style="color: #009900;">&#41;</span>.<span style="color: #660066;">removeAttr</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'disabled'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> &nbsp;<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></div>
+          
+
+    </div>
+
+
+   
+<a name="email"></a> <br />
+    <div class="jquery" style=" color: #006; border: 1px solid #d0d0d0;
+        background-color: #eee; padding: 10px;">
+        <h2>
+            Email Templates</h2>
+
+            <h3>Send yourself an email</h3>
+            <form method="POST" action=""  >
+
+                <textarea id="EmailMessage" name="message"></textarea>
+                        
+                <input type="submit" id="EmailButton" value="Send Email" onclick="$(this).attr('disabled', 'disabled'); ServerCyde.Email.DemoEmail({ToUserID : '[&#37;currentuserid&#37;]', message : $('#EmailMessage').val() }, function() {alert('You have sent yourself an email.');  $('#EmailButton').removeAttr('disabled');  }, function(data) {  alert('CustomErrorHandler:' + data.val.Errors.join(' \n\n '));  $('#EmailButton').removeAttr('disabled');  }); return false;" />
+        
+            </form>
+
+            <br />
+            <div class="javascript">ServerCyde.<span class="me1">Email</span>.<span class="me1">DemoEmail</span><span class="br0">&#40;</span><span class="br0">&#123;</span>ToUserID <span class="sy0">:</span> <span class="br0">&#91;</span><span class="sy0">%</span>currentuserid<span class="sy0">%</span><span class="br0">&#93;</span><span class="sy0">,</span> message <span class="sy0">:</span> $<span class="br0">&#40;</span><span class="st0">'#EmailMessage'</span><span class="br0">&#41;</span>.<span class="me1">val</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#125;</span><span class="sy0">,</span> <span class="kw2">function</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span><span class="kw3">alert</span><span class="br0">&#40;</span><span class="st0">'You have sent yourself an email.'</span><span class="br0">&#41;</span><span class="sy0">;</span><span class="br0">&#125;</span><span class="sy0">,</span> <span class="kw2">null</span><span class="br0">&#41;</span><span class="sy0">;</span></div>
+        
+    </div>
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+﻿<fieldset>
+<ul class="Attribute">
+    <a style="float:right;" onclick="$(this).closest('fieldset').remove(); return false;" href="#"><b>- Remove Attribute</b></a>
+    <li >
+        <br />
+        <label for="[%count%]attribute">Enter attribute name:</label>
+        <input id="[%count%]attribute" name="[%count%]attribute" value="[%attribute%]" />
+    </li>
+        <li >
+        <br />
+        <label for="[%count%]attributevalue">Constant Value: <small>Leave blank to keep it a parameter. Tokens: [%inc:/a/html/dash/simpledb/tokens.htm%] </small></label>
+        <input id="[%count%]attributevalue" name="[%count%]attributevalue" value="[%attributevalue%]" />
+    </li> 
+    <li>
+        <br />
+        <label for="[%count%]replace">Replace:<br /><small>check to replace an existing value, otherwise it will turn into a multi-valued attribute.</small></label>
+        <input id="[%count%]replace" token="replace" name="[%count%]replace" value="true" type="checkbox" />
+    </li>
+</ul>
+</fieldset>

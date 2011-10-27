@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html dir="ltr" lang="en-US" itemscope itemtype="http://schema.org/Product">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>ServerCyde</title>
+[%inc:/a/html/public/head.html%]
+<script type="text/javascript">
+    var passed = false;
+
+    $().ready(function () {
+        $("#email").keypress(function (e) {
+            if (e.keyCode != 13) {
+                $("#email").val("Ditch the Dvorak KB, try again!");
+                return false;
+            }
+            else {
+                passed = true;
+                $("#email").unbind("keypress").val("");
+                $("#email").unbind("click").click(function () { if (this.value == 'TRY to Enter your e-mail address') { this.value = '' }; });
+                $("#message").text("You passed, enter email now");
+                setTimeout(' $("#message").fadeOut(function() {$(this).html("&nbsp;")});', 2000);
+                $("#email").keypress(function (e) { if (e.keyCode == 13) return false; });
+                return false;
+            }
+        });
+
+        $("#email").click(function () {
+            $("#email").val("press KeyCode 13 to continue...");
+        });
+
+    }); 
+   
+</script>
+<style type="text/css">
+#form {
+	width: 410px;
+	margin:  10px auto 0px auto;
+	}
+form {
+	background: url(/a/img/form.png) no-repeat;
+	height: 47px;
+	}
+input {
+	background: none;
+	border: none;
+	outline: 0;
+}
+input.text {
+	width: 268px;
+	padding: 13px 0 13px 24px;
+	color: #505050;
+	font-size: 16px;
+	float: left;
+	}
+input.submit {
+	width: 104px;
+	padding: 13px 0 13px 10px;
+	float: right;
+	cursor: pointer;
+	}
+
+
+</style>
+</head>
+<body>
+<div class="header">
+	<div>
+		<div class="center">
+			[%inc:/a/html/public/header.html%]
+			<div class="page-title">
+				<div>
+					<h2>Sign Up</h2>					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--div.header end -->
+<!--div.container start -->
+<div class="container">
+	<div class="center">
+        
+        <h2>THanks for your interest, sign up to get invited to the beta (if you can solve the sign up challenge)</h2>
+    									
+	 <div id="form" > 
+        <form action="" onsubmit="return passed;" method="post">
+        <div>
+            <input id="email" type="text" class="text" name="email" value="TRY to Enter your e-mail address"
+                onfocus="if(this.value=='TRY to Enter your e-mail address') { this.value = 'press KeyCode 13 to continue...' }" onblur="if(this.value=='') { this.value = 'TRY to Enter your e-mail address' }" />
+                <input type="submit" class="submit" value=""  /></div>
+        </form> 
+        <span id="message" ">&nbsp; </span>
+    </div>
+</div>
+</div>
+
+<!--div.container end -->
+[%inc:/a/html/public/footer.html%] 
+</body>
+</html>

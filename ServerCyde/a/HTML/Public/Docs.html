@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html dir="ltr" lang="en-US" itemscope itemtype="http://schema.org/Product">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title> ServerCyde</title>
+[%inc:/a/html/public/head.html%]
+
+<style type="text/css">
+
+   
+
+</style>
+
+</head>
+<body class="docs">
+<div class="header">
+	<div>
+		<div class="center">
+			[%inc:/a/html/public/header.html%]
+			<div class="page-title">
+				<div>
+					<ul>
+                        <li><h2 class="page-title-name">Developers:</h2></li>
+                        <li><h2 class="selected-page"><a href="/docs/" >Quick Start</a></h2></li>
+                        <li><h2><a href="http://www.youtube.com/watch?v=_9DlKc8aVx8&feature=player_embedded" target="_blank">Tutorial Video</a></h2></li>
+                        <li><h2><a href="http://scan2chat.com" target="_blank">Sample Site</a></h2></li> 
+                        <li><h2><a href="/demos/" target="_blank">Demos</a></h2></li> 
+                    </ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--div.header end -->
+<!--div.container start -->
+<div class="container">
+	<div class="center">		
+		<div class="feature-sets"> 
+			<ul class="submenu">
+				<li><a href="#" title="Feature Set 1"> Quick Start</a></li>
+				<li><a href="#Tokens" title="Feature Set 2">Tokens</a></li>
+				<li><a href="#Comet" title="Feature Set 3">Comet</a></li>
+				<li><a href="#Support" title="Feature Set 4">Great Support!</a></li>
+			</ul>
+             
+               
+  </div>
+            
+            <h2>QuickStart Guide</h2>
+
+            <h3 class="callout">This step by step guide will get you up and running using the ServerCyde API in no time</h3>
+
+            <h3>1. Create a new ServerCyde "Site"</h3>
+             
+            <p>The script tag that you will put on your page is tailored to have the database call that you create just for your site, so create a new site, add the details and then you will get a script tag to place in your source.</p>
+
+            <h3>2. Authentication</h3>
+
+            <p>In order to run most calls the client needs to have am identity cookie. To get one they need to sign up or sign in to your site</p>
+            <p>Create a form with 4 fields: email, name, password, rememberMe</p>
+            <p>In the user tab you will see the all the calls that you need to create and manage users, clicking on one of them will give you a test form. That form will show you the required fields and a sample JSON response.If you are building a native mobile app then you can make calls directly to the URLs that you see in the test form instead of using the javascript library</p>
+            <p>To create a new user wire a function that runs ServerCyde.Users.SignUp to the onlcick event of the submit button and pass in the serialized form or a data object eg: <code> {email:"email@email.com", name: "dude" ... }</code></p>
+            <p>Build a sign in form in a similar fashion</p>
+
+            <p><b>Hint: You can just copy the form and functionaly from the <a href="http://scan2chat.com/?=6D">Example site</a></b></p>
+
+            <h3>3. Create a Domain</h3>
+
+            <p>In the domain tab you can see the domains that you already have and you can create new domains</p>
+            <p>Create the domains that you will be needing for your app</p>
+
+            <h3>4. Create Modify Calls</h3>
+
+            <p>To add data you will be passing data into a modify call that you have saved.</p>
+            <p>You will invoke the call using the nickname that you give it.</p>
+            <p>If you build a call that has a token that requires session based info like the current user id or current user name then the call will only run if the current user is authenticated and email confirmed</p>
+            <p>Once you save a modify call you can see the syntax neede to invoke it in the Modify tab</p>
+
+            <h3>5. Create select calls, emails, and comet features</h3>
+
+            <p>These work in a similar way to the modify calls, at this point you should have the hang of it.</p>
+
+            <h3>6. Publish your site</h3>
+
+            <p>All of the functions use cross domain resources so there is no difference between running the site locally and running on a host, all you have to do is upload your HTML to a web server</p>
+
+            <a name="Tokens"></a>
+            <h2>Tokens</h2>
+
+            <p>Whats makes servercyde calls secure is that you can have the server insert values into calls instead of leaving them exposed to browser manipulation. For example if you only wanted to let a user see results from the database that they themselves inserted you would build a query like:
+            <code>Select * From tweets Where UserID = [%currentuserid%]</code> as long you you built the modify to also inject that same value for userid you will be able to ensure secure results.</p>
+            
+            <a name="Comet"></a>
+            <h2>Comet</h2>
+
+            <p>The comet feature works like a broadcast channel. Everyone who is subscribed will get updates as soon as anyone publishes something. To prevent spam only autheticated and email confirmed users can publish but anyone can subscribe.</p>
+            <p>For security reasons you may want to ensure that you don't execute the values that get published or really any user submitted data to prevent undesired code running on recipients browsers.</p>
+
+            <a name="Support"></a>
+            <h2>Support</h2>
+
+            <p>During the beta we are here to hold your hand. Shoot us an email at support@servercyde.com and we will reply asap</p>
+            <p>If you need immediate help you can take a look at the <a href="http://forum.servercyde.com">forums</a></p>
+
+
+            			
+			<!--<div>
+				<p><img class="alignright" src="/a/img/screenshot.jpg" alt="Tour" /></p>									
+				<h4>Condimentum ornare</h4>
+				<p>
+				Nam felis quam, blandit nec feugiat quis, gravida et libero. Nulla ullamcorper auctor justo, eu feugiat nibh laoreet eget. Nulla luctus pellentesque suscipit. Nullam eu mauris nisi, sed pellentesque mi. Donec dignissim sem id erat rhoncus mattis.
+				</p>
+				<ul class="clear">
+					<li>
+						<h5>
+						<img src="/a/img/i_global.png" alt="Condimentum ornare" class="v-bt" />Condimentum ornare</h5>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas tristique volutpat arcu eget varius. Praesent vulputate cursus turpis in tempus. Nullam auctor sapien rhoncus diam convallis dictum.</p>
+					</li>
+					
+					<li>
+						<h5><img src="/a/img/i_bstock.png" alt="Curabitur arcu nulla" class="v-bt" />Curabitur arcu nulla</h5>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas tristique volutpat arcu eget varius. Praesent vulputate cursus turpis in tempus. Nullam auctor sapien rhoncus diam convallis dictum.</p>
+					</li>
+					
+					<li>
+						<h5><img src="/a/img/i_download.png" alt="Fusce velit tinicdunt" class="v-bt" />Fusce velit tinicdunt</h5>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas tristique volutpat arcu eget varius. Praesent vulputate cursus turpis in tempus. Nullam auctor sapien rhoncus diam convallis dictum.</p>
+					</li>
+				</ul>
+			</div>-->
+		</div>
+	</div>
+</div>
+<!--div.container end -->
+[%inc:/a/html/public/footer.html%]
+
+<script type='text/javascript' src='/a/js/jquery.form.js?ver=2.02m'></script>
+</body>
+</html>

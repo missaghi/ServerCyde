@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html dir="ltr" lang="en-US" itemscope itemtype="http://schema.org/Product">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>ServerCyde</title>
+[%inc:/a/html/public/head.html%]
+<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.min.js"></script>
+
+<script type="text/javascript">
+
+    $().ready(function () {
+        $.validator.methods.example = function (value, element, param) {
+            return value != $(element).attr('title');
+        };
+
+        $("#signin_form").validate({
+            errorElement: "span",
+            errorContainer: $("#errors"),
+            errorPlacement: function (error, element) {
+                element.closest("li").addClass("error");
+                element.after(error);
+            },
+            success: function (label) {
+                label.removeClass("error").closest("li").removeClass("error");
+            },
+            rules: {
+                email: { required: true },
+                password: { required: true } 
+            }
+        });
+    }); 
+   
+</script>
+<style type="text/css"> 
+
+</style>
+</head>
+<body>
+<div class="header">
+	<div>
+		<div class="center">
+			[%inc:/a/html/public/header.html%]
+			<div class="page-title">
+				<div>
+					<h2>Sign Up</h2>					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--div.header end -->
+<!--div.container start -->
+<div class="container">
+	<div class="center">									
+	 <div id="form" > 
+        [%notification%]
+
+       <form class="fancyForm" id="signin_form" action="" method="post">
+        <ul>
+		    <li>
+			    <label for="email">Email Address:</label>
+			    <input id="email" name="email" value="[%email%]" type="text" />
+			    <em>*</em> 
+            </li>
+			
+			<li>
+			    <label for="Password">Password:</label>
+			    <input id="password" name="password" value="[%password%]" type="password" />
+			    <em>*</em>
+            </li>
+			
+			<li>  
+                <label for="remember" >Remember me:</label>
+                <select	class="remember" id="remember" name="remember">
+					<option value="no">For 1 Day</option>
+					<option value="yes">For 1 Year</option> 
+				</select>
+
+		    </li>
+
+            <li class="a-center">
+			    <button type="submit"><span class="button"><span>Sign in</span></span></button>
+		    </li>
+        </ul>
+        </form>
+    </div>
+    <p>
+        Need to create an account? <a href="/register/">Sign Up Here</a>
+    </p>
+
+   
+    <p>
+        <b>Login Trouble?</b><br />
+        <a href="/forgot/">Forgot password</a>
+    </p>
+</div>
+</div>
+
+<!--div.container end -->
+[%inc:/a/html/public/footer.html%] 
+</body>
+</html>

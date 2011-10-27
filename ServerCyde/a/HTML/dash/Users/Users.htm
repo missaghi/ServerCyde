@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>ServerCyde - Dashboard</title>[%inc:/a/html/dash/head.htm%] 
+    <script type="text/javascript">
+    
+    </script>
+ </head>
+<body nav="navusers" style="position:relative;">
+    [%inc:/a/html/dash/nav.htm%]
+    <div id="Main">
+
+        <div class="middle box  ui-corner-all">
+            <div class="content">
+                    [%notification%]
+                <h3>
+                    Users</h3>
+                    <hr />
+                <ul>
+                    <li><a href="">Get all users</a> (coming soon)</li>
+                    <li><a href="">Get .CSV of banned users</a>  (coming soon)</li>
+                </ul>
+                    <hr />
+                <h3>
+                    Users Calls Via the JS Library (click tests below to see required parameters)</h3>
+                    <p>ServerCyde.User.SignUp(data, success, failed)</p>
+                    <p>ServerCyde.User.SignIn(data, success, failed)</p>
+                    <p>ServerCyde.User.SignOut(data, success, failed)</p>
+                    <p>ServerCyde.User.Forgot(data, success, failed)</p>
+                    <p>ServerCyde.User.ResendConfirmation(data, success, failed)</p>
+                    <p>ServerCyde.User.ChangePassword(data, success, failed)</p>
+                    <p>ServerCyde.User.ChangeName(data, success, failed)</p>
+                    <p>ServerCyde.User.ChangeEmail(data, success, failed)</p>
+                    <p>ServerCyde.User.UserDetails(data, success, failed)</p>
+                    <hr />
+                <h3>
+                    Test Users Calls Directly To The server (click to get test form)</h3>
+                    <a target="_blank" href="http://api.servercyde.com/API/[%siteid%]/Person/GetPersonByID/?test=test">/API/[%siteid%]/Person/GetPersonByID/</a><br>
+                    <a target="_blank" href="http://api.servercyde.com/API/[%siteid%]/Person/GetCurrentPerson/?test=test">/API/[%siteid%]/Person/GetCurrentPerson/</a><br>
+                    <a target="_blank" href="http://api.servercyde.com/API/[%siteid%]/Person/SignUp/?test=test">/API/[%siteid%]/Person/SignUp/</a><br>
+                    <a target="_blank" href="http://api.servercyde.com/API/[%siteid%]/Person/SignIn/?test=test">/API/[%siteid%]/Person/SignIn/</a><br>
+                    <a target="_blank" href="http://api.servercyde.com/API/[%siteid%]/Person/SendConfirmation/?test=test">/API/[%siteid%]/Person/SendConfirmation/</a><br>
+                    <a target="_blank" href="http://api.servercyde.com/API/[%siteid%]/Person/SignOut/?test=test">/API/[%siteid%]/Person/SignOut/</a><br>
+                    <a target="_blank" href="http://api.servercyde.com/API/[%siteid%]/Person/ChangePassword/?test=test">/API/[%siteid%]/Person/ChangePassword/</a><br>
+                    <a target="_blank" href="http://api.servercyde.com/API/[%siteid%]/Person/ChangeName/?test=test">/API/[%siteid%]/Person/ChangeName/</a><br>
+                    <a target="_blank" href="http://api.servercyde.com/API/[%siteid%]/Person/ChangeEmail/?test=test">/API/[%siteid%]/Person/ChangeEmail/</a><br>
+                    <a target="_blank" href="http://api.servercyde.com/API/[%siteid%]/Person/ResetPassword/?test=test">/API/[%siteid%]/Person/ResetPassword/</a>
+            </div> 
+        </div> 
+
+    </div>
+    [%footer%]
+    <div class="hidden">
+        <div class="" id="ConfirmDomainChange">
+             <div id="basic-template"> 
+                <p>Changing the domain will result in losing all of the current setting.</p>
+                <button class="confirm  ui-dialog-close">Change Domain</button> <button class="cancel ui-dialog-close">Cancel</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

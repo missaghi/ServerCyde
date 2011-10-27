@@ -1,0 +1,101 @@
+﻿ .social_button {float:left; margin-top:5px; padding-left:10px;}
+    .social_button[type="email"] {border:1px solid #ccc; padding:1px; margin-right:6px; margin-left:10px;}
+    .notice h3 {font-size:20px; padding:0; margin:0; }
+    .notice {text-align:center;}
+    .social_buttons {width:638px; margin-left:auto; margin-right:auto; margin-top:5px; }
+    @media all and (min-width: 1425px)
+    { 
+        .notice h3 {  float:left; padding-top:4px;}
+        .social_button {margin-top:7px;}
+        .social_buttons {width:auto; margin:0; float:left;}
+    }
+    
+    
+    /*.container h2 {font-size:2em; padding:0; margin:20px; margin-left:0px; color:#0A5477; border-bottom:1px solid #ccc;}*/
+    .docs  h3 {font-size:107%; } 
+    h3.callout { background:#eee; border-left:7px solid #ccc; padding:20px;    margin-top:15px; margin-bottom:15px; color:#0067AB;}
+    .callout small {font-weight:normal; color:#333; display:block; margin-top:6px; line-height:20px;}
+    .docs p {margin:10px; padding:10px;}
+    .page-title h2 {padding-left:30px;}
+    h2.page-title-name, h2.selected-page {font-weight:bold;}
+    .docs code {  display:block; background: #E0EEF8;
+            border: 1px solid #B6D7EF;
+            padding: 15px; margin:15px;}
+    
+    .numbers li {list-style-type:decimal;  margin-left:20px;}
+    
+    
+    
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.javascript  {font-family:monospace;color: #006;display:block; background: #E0EEF8;
+            border: 1px solid #B6D7EF;
+            padding: 15px;  }
+.javascript a:link {color: #000060;}
+.javascript a:hover {background-color: #f0f000;}
+.javascript .imp {font-weight: bold; color: red;}
+.javascript .kw1 {color: #000066; font-weight: bold;}
+.javascript .kw2 {color: #003366; font-weight: bold;}
+.javascript .kw3 {color: #000066;}
+.javascript .co1 {color: #006600; font-style: italic;}
+.javascript .co2 {color: #009966; font-style: italic;}
+.javascript .coMULTI {color: #006600; font-style: italic;}
+.javascript .es0 {color: #000099; font-weight: bold;}
+.javascript .br0 {color: #009900;}
+.javascript .sy0 {color: #339933;}
+.javascript .st0 {color: #3366CC;}
+.javascript .nu0 {color: #CC0000;}
+.javascript .me1 {color: #660066;}
+.javascript span.xtra { display:block; }
+ 
+
+
+        h3.callout
+        {
+            font-size: 18px;
+            position:relative;
+        }
+        h3.callout ul {font-size: 12px;}
+        
+        #cometdemo {position:relative;}
+        .comets
+        { 
+            border:1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            padding-top:0px;
+        }
+        
+        .comets ul { padding: 0;;
+            margin: 0; margin-top:5px;}
+        
+        .comets li
+        { 
+            padding-left:0px; margin-left:0px;
+            margin-right:20px; margin-bottom:5px; margin-top:5px;
+        }
+        
+        .features3
+        {
+            margin-top: 15px;
+        }
+        .features3 li
+        {
+            height:156px;
+            border-left: 10px solid #e3e4e5;
+            background: #efefef;
+            width: 290px;
+            position:relative;
+        }
+        .features3 li .content
+        {
+            margin: 20px;
+            padding: 0;
+            font-size: 13px;
+        }
+        .features3 li .content h3
+        {
+            font-family: Sans-Serif;
+        }

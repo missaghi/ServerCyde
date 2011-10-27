@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>ServerCyde - Dashboard</title>[%inc:/a/html/dash/head.htm%] 
+    <script type="text/javascript">
+    
+    </script>
+ </head>
+<body nav="navAPIs" style="position:relative;">
+    [%inc:/a/html/dash/nav.htm%]
+    <div id="Main">
+
+        <div class="middle box  ui-corner-all">
+            <div class="content">
+                    [%notification%]
+                    <div style="float:right;  "><a href="./api/0/" class=""><b>+ Add Call</b></a></div>
+                <h3>
+                    Custom API calls</h3>
+                    <hr />
+                <ul>
+                    [%apis%]
+                </ul>
+
+
+                 
+        </div> 
+
+
+            </div> 
+         
+
+    </div>
+    [%footer%]
+     
+</body>
+</html>
