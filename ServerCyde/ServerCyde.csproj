@@ -1,0 +1,399 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{53CC1296-41D9-4567-9858-37C08B6FD60E}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ServerCyde</RootNamespace>
+    <AssemblyName>ServerCyde</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AWSSDK, Version=1.3.8.0, Culture=neutral, PublicKeyToken=cd2d24cd2bace800, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Program Files (x86)\AWS SDK for .NET\bin\AWSSDK.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.3.0.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net, Version=2.0.0.4, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Lucene.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="OpenForum.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\OpenForum.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpFusion">
+      <HintPath>..\..\SharpFusion\SharpFusion\bin\Debug\SharpFusion.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="a\css\jquery.tooltip.css" />
+    <Content Include="a\css\saas-custom.css" />
+    <Content Include="a\css\ui.notify.css" />
+    <Content Include="a\HTML\dash\APIs\apis-edit.htm" />
+    <Content Include="a\HTML\dash\APIs\apis-item.htm" />
+    <Content Include="a\HTML\dash\APIs\apis.htm" />
+    <Content Include="a\HTML\dash\Comet\Comet.htm" />
+    <Content Include="a\HTML\dash\Email\Emails.htm" />
+    <Content Include="a\HTML\dash\Email\email-edit.htm" />
+    <Content Include="a\HTML\dash\Email\email-item.htm" />
+    <Content Include="a\HTML\dash\footer.htm" />
+    <Content Include="a\HTML\dash\SimpleDB\Gets.htm" />
+    <Content Include="a\HTML\dash\SimpleDB\get-calls.htm" />
+    <Content Include="a\HTML\dash\SimpleDB\get-attributes.htm" />
+    <Content Include="a\HTML\dash\SimpleDB\get-edit.htm" />
+    <Content Include="a\HTML\dash\SimpleDB\Modifys.htm" />
+    <Content Include="a\HTML\dash\SimpleDB\modify-calls.htm" />
+    <Content Include="a\HTML\dash\SimpleDB\modify-conditions.htm" />
+    <Content Include="a\HTML\dash\SimpleDB\modify-attributes.htm" />
+    <Content Include="a\HTML\dash\SimpleDB\modify-edit.htm" />
+    <Content Include="a\HTML\dash\SimpleDB\select-queries.htm" />
+    <Content Include="a\HTML\dash\SimpleDB\Selects.htm" />
+    <Content Include="a\HTML\dash\SimpleDB\select-conditions.htm" />
+    <Content Include="a\HTML\dash\SimpleDB\select-fields.htm" />
+    <Content Include="a\HTML\dash\SimpleDB\Selects-edit.htm" />
+    <Content Include="a\HTML\dash\SimpleDB\Domains.htm" />
+    <Content Include="a\HTML\dash\SimpleDB\SimpleDB.htm" />
+    <Content Include="a\HTML\dash\SimpleDB\tokens.htm" />
+    <Content Include="a\HTML\dash\Users\Users.htm" />
+    <Content Include="a\HTML\Public\about.html" />
+    <Content Include="a\HTML\Public\betabadge.htm" />
+    <Content Include="a\HTML\Public\blog\blog-post.html" />
+    <Content Include="a\HTML\Public\blog\blog.html" />
+    <Content Include="a\HTML\Public\blog\item-blog-post.htm" />
+    <Content Include="a\HTML\Public\contact-us.html" />
+    <Content Include="a\HTML\Public\confirm.html" />
+    <Content Include="a\HTML\Public\CheckYourEmail.html" />
+    <Content Include="a\HTML\Public\badges.html" />
+    <Content Include="a\HTML\Public\developers.html" />
+    <Content Include="a\HTML\Public\showcase.html" />
+    <Content Include="a\HTML\Public\support.html" />
+    <Content Include="a\HTML\Public\Pay.html" />
+    <Content Include="a\HTML\Public\tos.html" />
+    <Content Include="a\HTML\Public\Forgot.html" />
+    <Content Include="a\HTML\Public\signin.html" />
+    <Content Include="a\HTML\Public\register.html" />
+    <Content Include="a\HTML\dash\sitedetails.htm" />
+    <Content Include="a\HTML\dash\head.htm" />
+    <Content Include="a\HTML\dash\home.htm" />
+    <Content Include="a\HTML\dash\nav.htm" />
+    <Content Include="a\HTML\sandbox\sandbox.htm" />
+    <Content Include="a\HTML\Public\Unsubscribe.html" />
+    <Content Include="a\HTML\Public\Unsubscribed.html" />
+    <Content Include="a\HTML\Public\Thanks.html" />
+    <Content Include="a\HTML\Public\footer.html" />
+    <Content Include="a\HTML\Public\head.html" />
+    <Content Include="a\HTML\Public\header.html" />
+    <Content Include="a\HTML\Public\help.html" />
+    <Content Include="a\HTML\Public\home.html" />
+    <Content Include="a\HTML\msg\error.htm" />
+    <Content Include="a\HTML\Public\plans-pricing.html" />
+    <Content Include="a\HTML\Public\sign-up.html" />
+    <Content Include="a\HTML\Public\Docs.html" />
+    <Content Include="a\img\ajax-loader.gif" />
+    <Content Include="a\img\arrows.png" />
+    <Content Include="a\img\bg-btn.png" />
+    <Content Include="a\img\bg-button.png" />
+    <Content Include="a\img\bg-button3.png" />
+    <Content Include="a\img\bg-button4.png" />
+    <Content Include="a\img\bg-container.gif" />
+    <Content Include="a\img\bg-container.png" />
+    <Content Include="a\img\bg-footer-prom.png" />
+    <Content Include="a\img\bg-grid-box.png" />
+    <Content Include="a\img\bg-input-focus.png" />
+    <Content Include="a\img\bg-input.png" />
+    <Content Include="a\img\bg-mask.png" />
+    <Content Include="a\img\bg-nav.png" />
+    <Content Include="a\img\bg-pagenav.png" />
+    <Content Include="a\img\bg-post.png" />
+    <Content Include="a\img\bg-postmeta.gif" />
+    <Content Include="a\img\bg-seach-button.gif" />
+    <Content Include="a\img\bg-section3.png" />
+    <Content Include="a\img\bg-section4.png" />
+    <Content Include="a\img\bg-section5.png" />
+    <Content Include="a\img\bg-slider.png" />
+    <Content Include="a\img\bg-spotlights.png" />
+    <Content Include="a\img\bg-tooltip.png" />
+    <Content Include="a\img\bg-tweets.png" />
+    <Content Include="a\img\bg-widget-box.gif" />
+    <Content Include="a\img\bg.gif" />
+    <Content Include="a\img\btn-free-trial.png" />
+    <Content Include="a\img\btn-keep-reading.png" />
+    <Content Include="a\img\btn-reply.gif" />
+    <Content Include="a\img\btn-sign-up.png" />
+    <Content Include="a\img\bullet.gif" />
+    <Content Include="a\img\button_bg.png" />
+    <Content Include="a\img\datepicker.gif" />
+    <Content Include="a\img\default\bg-header.jpg" />
+    <Content Include="a\img\divider.png" />
+    <Content Include="a\img\dot.gif" />
+    <Content Include="a\img\footer.png" />
+    <Content Include="a\img\gray\bg-header.jpg" />
+    <Content Include="a\img\green\bg-header.jpg" />
+    <Content Include="a\img\icon_sprite.png" />
+    <Content Include="a\img\i_basket.png" />
+    <Content Include="a\img\i_basket30x30.png" />
+    <Content Include="a\img\i_book.png" />
+    <Content Include="a\img\i_bstock.png" />
+    <Content Include="a\img\i_buoy.png" />
+    <Content Include="a\img\i_calendar.png" />
+    <Content Include="a\img\i_calendar30x30.png" />
+    <Content Include="a\img\i_clock.png" />
+    <Content Include="a\img\i_clock30x30.png" />
+    <Content Include="a\img\i_comments.png" />
+    <Content Include="a\img\i_download.png" />
+    <Content Include="a\img\i_gear.png" />
+    <Content Include="a\img\i_global.png" />
+    <Content Include="a\img\i_no.png" />
+    <Content Include="a\img\i_safe30x30.png" />
+    <Content Include="a\img\i_socialFacebook.png" />
+    <Content Include="a\img\i_socialFlickr.png" />
+    <Content Include="a\img\i_socialLinkedin.png" />
+    <Content Include="a\img\i_socialRss.png" />
+    <Content Include="a\img\i_socialTwitter.png" />
+    <Content Include="a\img\i_socialYoutube.png" />
+    <Content Include="a\img\i_star.png" />
+    <Content Include="a\img\i_stick.png" />
+    <Content Include="a\img\i_sticky.png" />
+    <Content Include="a\img\i_stock.png" />
+    <Content Include="a\img\lavender\bg-header.jpg" />
+    <Content Include="a\img\light-beige\bg-header.jpg" />
+    <Content Include="a\img\logo.png" />
+    <Content Include="a\img\order-cc.png" />
+    <Content Include="a\img\order-cvv.png" />
+    <Content Include="a\img\progress_bar.gif" />
+    <Content Include="a\img\SaaS_II_02.png" />
+    <Content Include="a\img\screenshot.jpg" />
+    <Content Include="a\img\screenshot2.jpg" />
+    <Content Include="a\img\screenshot2.png" />
+    <Content Include="a\img\sep-link.png" />
+    <Content Include="a\img\sep-toplinks.png" />
+    <Content Include="a\img\sky\bg-header.jpg" />
+    <Content Include="a\img\slider_handles.png" />
+    <Content Include="a\img\slider_h_bg.gif" />
+    <Content Include="a\img\slider_v_bg.gif" />
+    <Content Include="a\img\sprite.png" />
+    <Content Include="a\img\step_1.png" />
+    <Content Include="a\img\step_2.png" />
+    <Content Include="a\img\step_3.png" />
+    <Content Include="a\img\tab_bg.gif" />
+    <Content Include="a\img\the_gradient.gif" />
+    <Content Include="a\img\thumb1.jpg" />
+    <Content Include="a\img\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="a\img\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="a\img\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="a\img\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="a\img\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="a\img\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="a\img\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="a\img\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="a\img\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="a\img\ui-icons_222222_256x240.png" />
+    <Content Include="a\img\ui-icons_228ef1_256x240.png" />
+    <Content Include="a\img\ui-icons_ef8c08_256x240.png" />
+    <Content Include="a\img\ui-icons_ffd27a_256x240.png" />
+    <Content Include="a\img\ui-icons_ffffff_256x240.png" />
+    <Content Include="a\JS\API.js" />
+    <Content Include="a\JS\Dash.js" />
+    <Content Include="a\JS\jquery-1.6.1.js" />
+    <Content Include="a\JS\jquery.cookie.js" />
+    <Content Include="a\JS\jquery.equalheight.js" />
+    <Content Include="a\JS\jquery.uniform.min.js" />
+    <Content Include="a\JS\jqueryui.js" />
+    <Content Include="a\JS\markitup\jquery.markitup.js" />
+    <Content Include="a\JS\markitup\sets\default\images\bold.png" />
+    <Content Include="a\JS\markitup\sets\default\images\clean.png" />
+    <Content Include="a\JS\markitup\sets\default\images\image.png" />
+    <Content Include="a\JS\markitup\sets\default\images\italic.png" />
+    <Content Include="a\JS\markitup\sets\default\images\link.png" />
+    <Content Include="a\JS\markitup\sets\default\images\list-bullet.png" />
+    <Content Include="a\JS\markitup\sets\default\images\list-numeric.png" />
+    <Content Include="a\JS\markitup\sets\default\images\picture.png" />
+    <Content Include="a\JS\markitup\sets\default\images\preview.png" />
+    <Content Include="a\JS\markitup\sets\default\images\stroke.png" />
+    <Content Include="a\JS\markitup\sets\default\set.js" />
+    <Content Include="a\JS\markitup\sets\default\style.css" />
+    <Content Include="a\JS\markitup\sets\html\images\bold.png" />
+    <Content Include="a\JS\markitup\sets\html\images\clean.png" />
+    <Content Include="a\JS\markitup\sets\html\images\h1.png" />
+    <Content Include="a\JS\markitup\sets\html\images\h2.png" />
+    <Content Include="a\JS\markitup\sets\html\images\h3.png" />
+    <Content Include="a\JS\markitup\sets\html\images\h4.png" />
+    <Content Include="a\JS\markitup\sets\html\images\h5.png" />
+    <Content Include="a\JS\markitup\sets\html\images\h6.png" />
+    <Content Include="a\JS\markitup\sets\html\images\image.png" />
+    <Content Include="a\JS\markitup\sets\html\images\italic.png" />
+    <Content Include="a\JS\markitup\sets\html\images\link.png" />
+    <Content Include="a\JS\markitup\sets\html\images\list-bullet.png" />
+    <Content Include="a\JS\markitup\sets\html\images\list-item.png" />
+    <Content Include="a\JS\markitup\sets\html\images\list-numeric.png" />
+    <Content Include="a\JS\markitup\sets\html\images\paragraph.png" />
+    <Content Include="a\JS\markitup\sets\html\images\picture.png" />
+    <Content Include="a\JS\markitup\sets\html\images\preview.png" />
+    <Content Include="a\JS\markitup\sets\html\images\stroke.png" />
+    <Content Include="a\JS\markitup\sets\html\readme.txt" />
+    <Content Include="a\JS\markitup\sets\html\set.js" />
+    <Content Include="a\JS\markitup\sets\html\style.css" />
+    <Content Include="a\JS\markitup\skins\markitup\images\bg-container.png" />
+    <Content Include="a\JS\markitup\skins\markitup\images\bg-editor-bbcode.png" />
+    <Content Include="a\JS\markitup\skins\markitup\images\bg-editor-dotclear.png" />
+    <Content Include="a\JS\markitup\skins\markitup\images\bg-editor-html.png" />
+    <Content Include="a\JS\markitup\skins\markitup\images\bg-editor-json.png" />
+    <Content Include="a\JS\markitup\skins\markitup\images\bg-editor-markdown.png" />
+    <Content Include="a\JS\markitup\skins\markitup\images\bg-editor-textile.png" />
+    <Content Include="a\JS\markitup\skins\markitup\images\bg-editor-wiki.png" />
+    <Content Include="a\JS\markitup\skins\markitup\images\bg-editor-xml.png" />
+    <Content Include="a\JS\markitup\skins\markitup\images\bg-editor.png" />
+    <Content Include="a\JS\markitup\skins\markitup\images\handle.png" />
+    <Content Include="a\JS\markitup\skins\markitup\images\menu.png" />
+    <Content Include="a\JS\markitup\skins\markitup\images\submenu.png" />
+    <Content Include="a\JS\markitup\skins\markitup\style.css" />
+    <Content Include="a\JS\markitup\skins\simple\images\handle.png" />
+    <Content Include="a\JS\markitup\skins\simple\images\menu.png" />
+    <Content Include="a\JS\markitup\skins\simple\images\submenu.png" />
+    <Content Include="a\JS\markitup\skins\simple\style.css" />
+    <Content Include="a\JS\markitup\templates\preview.css" />
+    <Content Include="a\JS\markitup\templates\preview.html" />
+    <Content Include="a\msg\0.htm" />
+    <Content Include="a\msg\1.htm" />
+    <Content Include="a\msg\2.htm" />
+    <Content Include="a\msg\3.htm" />
+    <Content Include="a\msg\error.htm" />
+    <Content Include="a\msg\msg.htm" />
+    <Content Include="a\msg\warning.htm" />
+    <Content Include="a\css\jquery-ui-1.8.5.custom.css" />
+    <Content Include="a\css\pagenavi-css.css" />
+    <Content Include="a\css\saas-admin.css" />
+    <Content Include="a\css\saas-common.css" />
+    <Content Include="a\css\saas-default.css" />
+    <Content Include="a\css\saas-gray.css" />
+    <Content Include="a\css\saas-green.css" />
+    <Content Include="a\css\saas-lavender.css" />
+    <Content Include="a\css\saas-light-beige.css" />
+    <Content Include="a\css\saas-sky.css" />
+    <Content Include="a\css\dash-style.css" />
+    <Content Include="a\css\styles.css" />
+    <Content Include="a\css\uniform.default.css" />
+    <Content Include="Model\api.htm" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Model\JSON.cs" />
+    <Compile Include="Model\Handler.cs" />
+    <Compile Include="Model\Module.cs" />
+    <Compile Include="Pages\Dash\page-api.cs" />
+    <Compile Include="Pages\IPNHandler.cs" />
+    <Compile Include="Pages\page-developers.cs" />
+    <Compile Include="Pages\Dash\page-comet.cs" />
+    <Compile Include="Pages\Dash\page-users.cs" />
+    <Compile Include="Pages\Dash\page-emails.cs" />
+    <Compile Include="Pages\Dash\page-gets.cs" />
+    <Compile Include="Pages\Dash\page-modifys.cs" />
+    <Compile Include="Pages\Dash\page-selects.cs" />
+    <Compile Include="Pages\Dash\page-domains.cs" />
+    <Compile Include="Pages\Dash\page-dash.cs" />
+    <Compile Include="Pages\Dash\SimpleDBPages.cs" />
+    <Compile Include="Pages\page_authentication.cs" />
+    <Compile Include="Pages\Dash\DashPages.cs" />
+    <Compile Include="Pages\Dash\page-site.cs" />
+    <Compile Include="Pages\page-unsubscribe.cs" />
+    <Compile Include="Pages\page-thanks.cs" />
+    <Compile Include="Pages\page-support.cs" />
+    <Compile Include="Pages\page-about.cs" />
+    <Compile Include="Pages\page_newsletter.cs" />
+    <Compile Include="Pages\page-blog.cs" />
+    <Compile Include="Pages\page-home.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="API\" />
+    <Folder Include="App_Data\" />
+    <Folder Include="templates\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ServerCydeData\ServerCydeData.csproj">
+      <Project>{80E1028F-9D04-4E6F-AEE4-EF064066E8EE}</Project>
+      <Name>ServerCydeData</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>52068</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
